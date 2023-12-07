@@ -1,0 +1,22 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class SurvivalGameGUI extends JFrame {
+
+    public SurvivalGameGUI() {
+        setTitle("Survival Game");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH); // Imposta la finestra a schermo intero
+        setUndecorated(true); // Rimuove il bordo e le decorazioni della finestra
+
+        // Aggiungi componenti, pannelli e altri elementi grafici qui
+
+        setVisible(true); // Rendi la finestra visibile
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new SurvivalGameGUI(); // Avvia l'applicazione creando un'istanza della finestra
+        });
+    }
+}
