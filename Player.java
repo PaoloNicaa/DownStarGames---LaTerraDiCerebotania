@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 // Definizione della classe giocatore
 public class Player {
     private int maxWeight = 100;
@@ -12,9 +15,7 @@ public class Player {
 
     public void move() {
         remainingSteps--;
-        // Logica del movimento del giocatore
-        // (Avanti, Indietro, Destra, Sinistra)
-        // Implementazione non fornita nell'esempio
+        
     }
 
     public void collectItem(Item item) {

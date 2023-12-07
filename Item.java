@@ -1,4 +1,4 @@
-public abstract class Item {
+public class Item {
    private String name;
    private int weight;
    private int value;
@@ -22,4 +22,8 @@ public abstract class Item {
    public Rarity getRarity() {
        return rarity;
    }
+
+    public String getName() {
+         return name;
+    }
 }
