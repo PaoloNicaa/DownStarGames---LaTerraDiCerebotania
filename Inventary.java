@@ -1,5 +1,0 @@
-//NICA
-
-public class Inventary {
-    
-}
