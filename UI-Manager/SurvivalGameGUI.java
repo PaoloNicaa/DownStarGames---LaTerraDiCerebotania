@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import utils.Player;
+import utils.Inventory;
 
 public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListener {
     private JLayeredPane layeredPane;
@@ -11,6 +13,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
     private JPanel playerPanel;
     private JLabel playerLabel;
     private int playerX, playerY;
+    Player player = new Player();
 
     public SurvivalGameGUI() {
         setTitle("Survival Game");
@@ -53,6 +56,16 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         timer.start();
     }
 
+    public void GruppoMove() {
+        if(player.canMove()) {
+            player.movimento();
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Game Over\nValore Oggetti totalizzato: " + player.getValoreOgg());
+            System.exit(0);
+        }
+    }
+
     public void actionPerformed(ActionEvent e) {
         // Aggiorna la posizione del giocatore
         playerPanel.setBounds(playerX, playerY, playerPanel.getWidth(), playerPanel.getHeight());
@@ -67,12 +80,16 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         int key = e.getKeyCode();
 
         if (key == KeyEvent.VK_W) {
+            GruppoMove();
             playerY -= 10; //Valore da cambiare in relazine al peso dopo la creazione di tale funzione
         } else if (key == KeyEvent.VK_A) {
+            GruppoMove();
             playerX -= 10;
         } else if (key == KeyEvent.VK_S) {
+            GruppoMove();
             playerY += 10;
         } else if (key == KeyEvent.VK_D) {
+            GruppoMove();
             playerX += 10;
         }
     }
