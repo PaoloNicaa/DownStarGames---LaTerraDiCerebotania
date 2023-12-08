@@ -26,7 +26,7 @@ public class Player {
         if (pesoAttuale + item.getPeso() <= pesoMax) {
             backpack.add(item);
             pesoAttuale += item.getPeso();
-            valoreOgg += item.getValue();
+            valoreOgg += item.getValore();
             return "L'oggetto " + item.getName() + " e' stato aggiunto all'inventario!";
         }
         else {

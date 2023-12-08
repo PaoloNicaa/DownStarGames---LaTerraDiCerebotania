@@ -29,7 +29,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); //Funzione per ottenere risoluzione dello schermo
         setSize((int)size.getWidth(), (int)size.getHeight());
         setExtendedState(JFrame.MAXIMIZED_BOTH); //Frame a schermo intero
-        setUndecorated(true);
+        setUndecorated(true); //True per togliere la barra sopra del frame - False per metterla
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Caricamento immagine sfondo

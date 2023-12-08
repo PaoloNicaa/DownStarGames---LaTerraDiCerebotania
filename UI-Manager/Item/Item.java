@@ -1,65 +1,54 @@
 package Item;
+import java.awt.*;
 import java.util.Random;
 //NICA
 
-public class Item {
-   private String name;
-   private int x;
-   private int y; 
-   private int peso;
-   private int value;
-   private String tipoRarita;
-   private int rarity;
+public abstract class Item {
+    private String name;
+    private int x;
+    private int y; 
+    private int peso;
+    private int valore;
+    private String tipoRarita;
+    Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); //Metodo di java awt per prendere la risoluzione dello schermo
 
-   public Item(String name, String tipoRarita) {
-       this.name = name;
-       this.tipoRarita = tipoRarita;
-   }
+    public Item(String name, String tipoRarita, int valore, int peso) {
+        this.name = name;
+        this.tipoRarita = tipoRarita;
+        this.valore = valore;
+        this.peso = peso;
+    }
 
-   public void setPeso() {
-       if (getRarity() == 3) {
-           this.peso = 25;
-       } else if (getRarity() == 4) {
-           this.peso = 20;
-       } else if (getRarity() == 5) {
-           this.peso = 15;
-       } else if (getRarity() == 6) {
-           this.peso = 10;
-       } else {
-           this.peso = 0;
-       }
-   }
-
-   public int getPeso() {
-       return peso;
-   }
-
-   public void setValue(){
-         if (getRarity() == 3) {
-              this.value = 100;
-         } else if (getRarity() == 4) {
-              this.value = 75;
-         } else if (getRarity() == 5) {
-              this.value = 50;
-         } else if (getRarity() == 6) {
-              this.value = 25;
-         } else {
-              this.value = 0;
-         }
-   } 
+    public int getPeso() {
+       return this.peso;
+    }
       
-   public int getValue() {
-       return value;
-   }
+    public int getValore() {
+       return this.valore;
+    }
 
-   public void setX() {
+    public String getName() {
+        return this.name;
+    }
+
+    public String getRarita() {
+        return this.tipoRarita;
+    }
+
+    public void setX() {
         Random random = new Random();
-        this.x = random.nextInt(31);
-   } 
+        this.x = random.nextInt(10, (int)size.getWidth() - 10);
+    } 
 
     public void setY() {
         Random random = new Random();
-        this.y = random.nextInt(31); 
+        this.y = random.nextInt(10, (int)size.getHeight() - 10);
+    }
+
+    public int rndItem() {
+        Random random = new Random();
+        int rnd = random.nextInt(0,4);
+        return rnd;
     }
 
     public int getX(){
@@ -69,34 +58,31 @@ public class Item {
     public int getY(){
         return y;
     }
-
-   public void setRarity(int rarity) {
-        if (tipoRarita.equals("Platinum")) {
-           this.rarity = 3;
-       } else if (tipoRarita.equals("Diamond")) {
-           this.rarity = 4;
-       } else if (tipoRarita.equals("Green")) {
-           this.rarity = 5;
-       } else if (tipoRarita.equals("Brown")) {
-           this.rarity = 6;
-       } else {
-           this.rarity = 0;
-       }
-   }
-
-   public int getRarity() {
-       return rarity;
-   }
-
-    public String getName() {
-         return name;
-    }
-
-    public Item spawnItem (int x, int y, int rarity, int weight, int value) {
-        Item item = new Item(name, tipoRarita);
-        item.setX();
-        item.setY();
-        item.setRarity(rarity);
-        return item;
+    
+    public Item spawnItem (int x, int y) {
+        setX();
+        setY();
+        int rndItem = rndItem();
+        if (rndItem == 0) {
+            Item mela = new Mela();
+            return mela;
+        }
+        else if (rndItem == 1) {
+            Item stivali = new Stivali();
+            return stivali;
+        }
+        else if (rndItem == 2) {
+            Item spada = new Spada();
+            return spada;
+        }
+        else if (rndItem == 3) {
+            Item coppa = new Coppa();
+            return coppa;
+        }
+        else if (rndItem == 4) {
+            Item anello = new Anello();
+            return anello;
+        }
+        else return null;
     }
 }
