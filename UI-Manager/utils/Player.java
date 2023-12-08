@@ -1,9 +1,8 @@
 package utils;
 import java.util.ArrayList;
 import java.util.List;
-
 import Item.Item;
-
+//NICA
 // Definizione della classe giocatore
 public class Player {
 
@@ -11,7 +10,6 @@ public class Player {
     protected int stepRimanenti = 50;
     protected int pesoAttuale = 0;
     protected int valoreOgg = 0;
-
     protected List<Item> backpack = new ArrayList<>();
 
     public boolean canMove() {
@@ -24,11 +22,15 @@ public class Player {
         stepRimanenti--;
     }
 
-    public void collectItem(Item item) {
-        if (pesoAttuale + item.getWeight() <= pesoMax) {
+    public String collectItem(Item item) {
+        if (pesoAttuale + item.getPeso() <= pesoMax) {
             backpack.add(item);
-            pesoAttuale += item.getWeight();
+            pesoAttuale += item.getPeso();
             valoreOgg += item.getValue();
+            return "L'oggetto " + item.getName() + " e' stato aggiunto all'inventario!";
+        }
+        else {
+            return "L'oggetto " + item.getName() + " non può essere aggiunto allo zaino perché supera il peso massimo";
         }
     }
 

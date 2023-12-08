@@ -5,31 +5,41 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import utils.Player;
-import utils.Inventory;
 
 public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListener {
     private JLayeredPane layeredPane;
     private JLabel backgroundLabel;
     private JPanel playerPanel;
     private JLabel playerLabel;
+    private JLabel testoLabel;
     private int playerX, playerY;
     Player player = new Player();
 
+    //Testo con formattazzione html cosi è bello
+    private String getText() {
+        return "<html><div style='text-align: center;'>- W A S D per muoversi<br>- ESC per uscire<br>- E per raccogliere oggetti<br><br>Mosse Rimanenti: " + player.getStepRimanenti() + "</div></html>";
+    }
+    //Funzione per aggiornare il counter dei passi rimanenti nel testo
+    private void aggText() {
+        testoLabel.setText(getText());
+    }
+
     public SurvivalGameGUI() {
         setTitle("Survival Game");
-        setSize(1920, 1080);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setUndecorated(false);
+        Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); //Funzione per ottenere risoluzione dello schermo
+        setSize((int)size.getWidth(), (int)size.getHeight());
+        setExtendedState(JFrame.MAXIMIZED_BOTH); //Frame a schermo intero
+        setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Caricamento immagine sfondo
         ImageIcon backgroundIcon = new ImageIcon(getClass().getResource("background.png"));
         backgroundLabel = new JLabel(backgroundIcon);
-        backgroundLabel.setSize(getWidth(), getHeight());
+        backgroundLabel.setSize(getSize());
 
         // Creazione pannello layered
         layeredPane = new JLayeredPane();
-        layeredPane.setPreferredSize(new Dimension(getWidth(), getHeight()));
+        layeredPane.setPreferredSize(getSize());
 
         // Aggiunta sfondo al livello 0
         layeredPane.add(backgroundLabel, JLayeredPane.DEFAULT_LAYER);
@@ -37,6 +47,9 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         // Creazione giocatore
         ImageIcon playerIcon = new ImageIcon(getClass().getResource("image.png"));
         playerLabel = new JLabel(playerIcon);
+        //Coordinate per giocatore al centro
+        playerX = (getWidth() - playerIcon.getIconWidth()) / 2;
+        playerY = (getHeight() - playerIcon.getIconHeight()) / 2;
 
         // Creazione pannello giocatore con layout manager FlowLayout
         playerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
@@ -44,8 +57,19 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         playerPanel.setOpaque(false); // Trasparenza per vedere lo sfondo
         playerPanel.add(playerLabel);
 
+        // Creazione JLabel per il testo
+        testoLabel = new JLabel(getText());
+        testoLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        testoLabel.setForeground(Color.WHITE); // Colore del testo
+        testoLabel.setHorizontalAlignment(JLabel.CENTER);
+        testoLabel.setVerticalAlignment(JLabel.TOP);
+        testoLabel.setBounds(0, 20, getWidth(), getHeight()); // Imposta dimensioni e posizione al centro
+
+
         // Posiziona giocatore al livello 1
+        playerPanel.setBounds(playerX, playerY, playerIcon.getIconWidth(), playerIcon.getIconHeight());
         layeredPane.add(playerPanel, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(testoLabel, JLayeredPane.MODAL_LAYER);
 
         add(layeredPane);
 
@@ -61,7 +85,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             player.movimento();
         }
         else {
-            JOptionPane.showMessageDialog(null, "Game Over\nValore Oggetti totalizzato: " + player.getValoreOgg());
+            JOptionPane.showMessageDialog(null, "              Game Over!\n  Valore Oggetti totalizzato: " + player.getValoreOgg(),"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", JOptionPane.INFORMATION_MESSAGE);
             System.exit(0);
         }
     }
@@ -81,16 +105,24 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
 
         if (key == KeyEvent.VK_W) {
             GruppoMove();
-            playerY -= 10; //Valore da cambiare in relazine al peso dopo la creazione di tale funzione
+            aggText();
+            playerY -= 20; //Valore da cambiare in relazine al peso dopo la creazione di tale funzione
         } else if (key == KeyEvent.VK_A) {
             GruppoMove();
-            playerX -= 10;
+            aggText();
+            playerX -= 20;
         } else if (key == KeyEvent.VK_S) {
             GruppoMove();
-            playerY += 10;
+            aggText();
+            playerY += 20;
         } else if (key == KeyEvent.VK_D) {
             GruppoMove();
-            playerX += 10;
+            aggText();
+            playerX += 20;
+        } else if (key == KeyEvent.VK_E) {
+            player.collectItem(null); //Trovare un modo per sapere l'item che voglio raccogliere
+        } else if (key == KeyEvent.VK_ESCAPE) {
+            System.exit(0);
         }
     }
 
@@ -100,6 +132,10 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             SurvivalGameGUI game = new SurvivalGameGUI();
+            ImageIcon iconaFrame = new ImageIcon(SurvivalGameGUI.class.getResource("icon.png"));
+            Image image = iconaFrame.getImage();
+
+            game.setIconImage(image);
             game.setVisible(true);
         });
     }
