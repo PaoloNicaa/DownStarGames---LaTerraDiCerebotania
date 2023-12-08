@@ -4,15 +4,17 @@ import java.util.Random;
 //NICA
 
 public abstract class Item {
+    private Random random; // Dichiaro random qui per evitare di dichiararlo in ogni classe che estende Item
     private String name;
     private int x;
     private int y; 
     private int peso;
     private int valore;
     private String tipoRarita;
-    Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); //Metodo di java awt per prendere la risoluzione dello schermo
+    Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); // Metodo di java awt per prendere la risoluzione dello schermo
 
     public Item(String name, String tipoRarita, int valore, int peso) {
+        this.random = new Random();
         this.name = name;
         this.tipoRarita = tipoRarita;
         this.valore = valore;
@@ -36,18 +38,15 @@ public abstract class Item {
     }
 
     public void setX() {
-        Random random = new Random();
-        this.x = random.nextInt(10, (int)size.getWidth() - 10);
+        this.x = random.nextInt((int)size.getWidth() - 20) + 10;
     } 
 
     public void setY() {
-        Random random = new Random();
-        this.y = random.nextInt(10, (int)size.getHeight() - 10);
+        this.y = random.nextInt((int)size.getHeight() - 20) + 10;
     }
 
     public int rndItem() {
-        Random random = new Random();
-        int rnd = random.nextInt(0,4);
+        int rnd = random.nextInt(5);
         return rnd;
     }
 
@@ -59,7 +58,7 @@ public abstract class Item {
         return y;
     }
     
-    public Item spawnItem (int x, int y) {
+    public Item spawnItem () {
         setX();
         setY();
         int rndItem = rndItem();
