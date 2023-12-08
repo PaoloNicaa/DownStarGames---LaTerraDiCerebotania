@@ -5,12 +5,9 @@ import java.util.Random;
 
 public abstract class Item {
     private String name;
-    private int x;
-    private int y; 
     private int peso;
     private int valore;
     private String tipoRarita;
-    Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); //Metodo di java awt per prendere la risoluzione dello schermo
 
     public Item(String name, String tipoRarita, int valore, int peso) {
         this.name = name;
@@ -35,54 +32,23 @@ public abstract class Item {
         return this.tipoRarita;
     }
 
-    public void setX() {
+    public int rndX() {
+        int x = 0;
+        Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         Random random = new Random();
-        this.x = random.nextInt(10, (int)size.getWidth() - 10);
+        x = random.nextInt(0, ((int)size.getWidth()) - 10);
+        return x;
     } 
 
-    public void setY() {
+    public int rndY() {
+        int y = 0;
+        Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         Random random = new Random();
-        this.y = random.nextInt(10, (int)size.getHeight() - 10);
-    }
-
-    public int rndItem() {
-        Random random = new Random();
-        int rnd = random.nextInt(0,4);
-        return rnd;
-    }
-
-    public int getX(){
-        return x;
-    }
-
-    public int getY(){
+        y = random.nextInt(0, ((int)size.getHeight()) - 10);
         return y;
     }
-    
-    public Item spawnItem (int x, int y) {
-        setX();
-        setY();
-        int rndItem = rndItem();
-        if (rndItem == 0) {
-            Item mela = new Mela();
-            return mela;
-        }
-        else if (rndItem == 1) {
-            Item stivali = new Stivali();
-            return stivali;
-        }
-        else if (rndItem == 2) {
-            Item spada = new Spada();
-            return spada;
-        }
-        else if (rndItem == 3) {
-            Item coppa = new Coppa();
-            return coppa;
-        }
-        else if (rndItem == 4) {
-            Item anello = new Anello();
-            return anello;
-        }
-        else return null;
+
+    public Item spawnItem () {
+        return null;
     }
 }
