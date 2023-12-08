@@ -13,9 +13,7 @@ public class Player {
     protected List<Item> backpack = new ArrayList<>();
 
     public boolean canMove() {
-        boolean canMove = false;
-        if(stepRimanenti > 0 && pesoAttuale <= pesoMax) canMove = true;
-        return canMove;
+        return stepRimanenti > 0 && pesoAttuale <= pesoMax;
     }
 
     public void movimento() {

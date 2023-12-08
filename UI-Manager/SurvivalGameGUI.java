@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import utils.Player;
+import Item.Item;
 
 public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListener {
     private JLayeredPane layeredPane;
@@ -14,6 +15,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
     private JLabel testoLabel;
     private int playerX, playerY;
     Player player = new Player();
+    Item item;
 
     //Testo con formattazzione html cosi è bello
     private String getText() {
@@ -50,6 +52,12 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         //Coordinate per giocatore al centro
         playerX = (getWidth() - playerIcon.getIconWidth()) / 2;
         playerY = (getHeight() - playerIcon.getIconHeight()) / 2;
+
+        /*ImageIcon mela = new ImageIcon(getClass().getResource("mela.png"));
+        JLabel melaLabel = new JLabel(mela);
+        melaLabel.setBounds(1000, 1000, mela.getIconWidth(), mela.getIconHeight());
+        layeredPane.add(melaLabel, JLayeredPane.PALETTE_LAYER);*/
+
 
         // Creazione pannello giocatore con layout manager FlowLayout
         playerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
