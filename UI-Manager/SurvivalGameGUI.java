@@ -22,7 +22,6 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
     private JLabel testoLabel;
     private ImageIcon playerIcon;
     private int playerX, playerY;
-    private boolean isMoving = false;
     Player player = new Player();
 
     // Testo con formattazzione html cosi è bello
@@ -164,7 +163,6 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             public void keyReleased(KeyEvent e) {
                 int key = e.getKeyCode();
                 if ((key == KeyEvent.VK_W) || (key == KeyEvent.VK_A) || (key == KeyEvent.VK_S) || (key == KeyEvent.VK_D)) {
-                    isMoving = false;
                     playerIcon = new ImageIcon(getClass().getResource("playerIdle.gif"));
                     playerLabel.setIcon(playerIcon);
                 }
@@ -200,28 +198,24 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             GruppoMove();
             aggText();
             playerY -= 20;
-            isMoving = true;
             playerLabel.setIcon(playerIcon);
         } else if (key == KeyEvent.VK_A) {
             playerIcon = new ImageIcon(getClass().getResource("playerRun.gif"));
             GruppoMove();
             aggText();
             playerX -= 20;
-            isMoving = true;
             playerLabel.setIcon(playerIcon);
         } else if (key == KeyEvent.VK_S) {
             playerIcon = new ImageIcon(getClass().getResource("playerRun.gif"));
             GruppoMove();
             aggText();
             playerY += 20;
-            isMoving = true;
             playerLabel.setIcon(playerIcon);
         } else if (key == KeyEvent.VK_D) {
             playerIcon = new ImageIcon(getClass().getResource("playerRun.gif"));
             GruppoMove();
             aggText();
             playerX += 20;
-            isMoving = true;
             playerLabel.setIcon(playerIcon);
         } else if (key == KeyEvent.VK_E) {
             player.collectItem(null); // Trovare un modo per sapere l'item che voglio raccogliere

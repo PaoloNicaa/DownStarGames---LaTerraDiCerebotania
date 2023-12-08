@@ -36,7 +36,7 @@ public abstract class Item {
         int x = 0;
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         Random random = new Random();
-        x = random.nextInt(0, ((int)size.getWidth()) - 10);
+        x = random.nextInt(0, ((int)size.getWidth()) - 15);
         return x;
     } 
 
@@ -44,7 +44,7 @@ public abstract class Item {
         int y = 0;
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         Random random = new Random();
-        y = random.nextInt(0, ((int)size.getHeight()) - 10);
+        y = random.nextInt(0, ((int)size.getHeight()) - 15);
         return y;
     }
 
