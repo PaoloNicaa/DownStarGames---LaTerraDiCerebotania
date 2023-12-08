@@ -1,13 +1,12 @@
 package Item;
 import java.util.Random;
-
 //NICA
 
 public class Item {
    private String name;
    private int x;
    private int y; 
-   private int weight;
+   private int peso;
    private int value;
    private String tipoRarita;
    private int rarity;
@@ -17,22 +16,22 @@ public class Item {
        this.tipoRarita = tipoRarita;
    }
 
-   public void setWeight() {
+   public void setPeso() {
        if (getRarity() == 3) {
-           this.weight = 25;
+           this.peso = 25;
        } else if (getRarity() == 4) {
-           this.weight = 20;
+           this.peso = 20;
        } else if (getRarity() == 5) {
-           this.weight = 15;
+           this.peso = 15;
        } else if (getRarity() == 6) {
-           this.weight = 10;
+           this.peso = 10;
        } else {
-           this.weight = 0;
+           this.peso = 0;
        }
    }
 
-   public int getWeight() {
-       return weight;
+   public int getPeso() {
+       return peso;
    }
 
    public void setValue(){

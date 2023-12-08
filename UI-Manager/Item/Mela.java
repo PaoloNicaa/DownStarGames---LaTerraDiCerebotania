@@ -1,5 +1,5 @@
 package Item;
 
-public class Spada {
+public class Mela {
     
 }
