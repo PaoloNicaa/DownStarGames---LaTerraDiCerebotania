@@ -1,12 +1,8 @@
 package utils;
-import java.awt.FlowLayout;
-import java.awt.Image;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 import Item.Item;
 //NICA
 
