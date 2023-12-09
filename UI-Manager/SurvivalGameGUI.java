@@ -79,61 +79,31 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
                 Mela mela = new Mela();
                 mela.spawnItem();
                 itemIcon[i] = new ImageIcon(getClass().getResource("mela.png"));
-                itemIcon[i] = new ImageIcon(itemIcon[i].getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
-                itemLabel[i] = new JLabel(itemIcon[i]);
-                itemPanel[i] = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-                itemPanel[i].setOpaque(false);
-                itemPanel[i].add(itemLabel[i]);
-                itemPanel[i].setBounds(mela.rndX(), mela.rndY(), 64, 64);
-                layeredPane.add(itemPanel[i], JLayeredPane.PALETTE_LAYER);
+                player.spawnOgg(itemIcon, itemLabel, itemPanel, layeredPane, mela, i);
             }
             else if(rnd == 1) {
                 Stivali stivali = new Stivali();
                 stivali.spawnItem();
                 itemIcon[i] = new ImageIcon(getClass().getResource("stivali.png"));
-                itemIcon[i] = new ImageIcon(itemIcon[i].getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
-                itemLabel[i] = new JLabel(itemIcon[i]);
-                itemPanel[i] = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-                itemPanel[i].setOpaque(false);
-                itemPanel[i].add(itemLabel[i]);
-                itemPanel[i].setBounds(stivali.rndX(), stivali.rndY(), 64, 64);
-                layeredPane.add(itemPanel[i], JLayeredPane.PALETTE_LAYER);
+                player.spawnOgg(itemIcon, itemLabel, itemPanel, layeredPane, stivali, i);
             }
             else if(rnd == 2) {
                 Spada spada = new Spada();
                 spada.spawnItem();
                 itemIcon[i] = new ImageIcon(getClass().getResource("spada.png"));
-                itemIcon[i] = new ImageIcon(itemIcon[i].getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
-                itemLabel[i] = new JLabel(itemIcon[i]);
-                itemPanel[i] = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-                itemPanel[i].setOpaque(false);
-                itemPanel[i].add(itemLabel[i]);
-                itemPanel[i].setBounds(spada.rndX(), spada.rndY(), 64, 64);
-                layeredPane.add(itemPanel[i], JLayeredPane.PALETTE_LAYER);
+                player.spawnOgg(itemIcon, itemLabel, itemPanel, layeredPane, spada, i);
             }
             else if(rnd == 3) {
                 Coppa coppa = new Coppa();
                 coppa.spawnItem();
                 itemIcon[i] = new ImageIcon(getClass().getResource("coppa.png"));
-                itemIcon[i] = new ImageIcon(itemIcon[i].getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
-                itemLabel[i] = new JLabel(itemIcon[i]);
-                itemPanel[i] = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-                itemPanel[i].setOpaque(false);
-                itemPanel[i].add(itemLabel[i]);
-                itemPanel[i].setBounds(coppa.rndX(), coppa.rndY(), 64, 64);
-                layeredPane.add(itemPanel[i], JLayeredPane.PALETTE_LAYER);
+                player.spawnOgg(itemIcon, itemLabel, itemPanel, layeredPane, coppa, i);
             }
             else if(rnd == 4) {
                 Anello anello = new Anello();
                 anello.spawnItem();
                 itemIcon[i] = new ImageIcon(getClass().getResource("anello.png"));
-                itemIcon[i] = new ImageIcon(itemIcon[i].getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
-                itemLabel[i] = new JLabel(itemIcon[i]);
-                itemPanel[i] = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-                itemPanel[i].setOpaque(false);
-                itemPanel[i].add(itemLabel[i]);
-                itemPanel[i].setBounds(anello.rndX(), anello.rndY(), 64, 64);
-                layeredPane.add(itemPanel[i], JLayeredPane.PALETTE_LAYER);
+                player.spawnOgg(itemIcon, itemLabel, itemPanel, layeredPane, anello, i);
             }
         }
 
@@ -170,9 +140,24 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         });
     }
 
-    public void GruppoMove() {
+    public void GruppoMove(char op, char xy) {
+        playerIcon = new ImageIcon(getClass().getResource("playerRun.gif"));
         if(player.canMove()) {
             player.movimento();
+            aggText();
+            if (op == '-' && xy == 'X') {
+                playerX -= 20;
+            }
+            else if (op == '-' && xy == 'Y') {
+                playerY += 20;
+            }
+            else if (op == '+' && xy == 'X') {
+                playerX += 20;
+            }
+            else if (op == '+' && xy == 'Y') {
+                playerY -= 20;
+            }
+            playerLabel.setIcon(playerIcon);
         }
         else {
             JOptionPane.showMessageDialog(null, "              Game Over!\n  Valore Oggetti totalizzato: " + player.getValoreOgg(),"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", JOptionPane.INFORMATION_MESSAGE);
@@ -194,29 +179,13 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         int key = e.getKeyCode();
 
         if (key == KeyEvent.VK_W) {
-            playerIcon = new ImageIcon(getClass().getResource("playerRun.gif"));
-            GruppoMove();
-            aggText();
-            playerY -= 20;
-            playerLabel.setIcon(playerIcon);
+            GruppoMove('+','Y');
         } else if (key == KeyEvent.VK_A) {
-            playerIcon = new ImageIcon(getClass().getResource("playerRun.gif"));
-            GruppoMove();
-            aggText();
-            playerX -= 20;
-            playerLabel.setIcon(playerIcon);
+            GruppoMove('-', 'X');
         } else if (key == KeyEvent.VK_S) {
-            playerIcon = new ImageIcon(getClass().getResource("playerRun.gif"));
-            GruppoMove();
-            aggText();
-            playerY += 20;
-            playerLabel.setIcon(playerIcon);
+            GruppoMove('-', 'Y');
         } else if (key == KeyEvent.VK_D) {
-            playerIcon = new ImageIcon(getClass().getResource("playerRun.gif"));
-            GruppoMove();
-            aggText();
-            playerX += 20;
-            playerLabel.setIcon(playerIcon);
+            GruppoMove('+', 'X');
         } else if (key == KeyEvent.VK_E) {
             player.collectItem(null); // Trovare un modo per sapere l'item che voglio raccogliere
         } else if (key == KeyEvent.VK_ESCAPE) {

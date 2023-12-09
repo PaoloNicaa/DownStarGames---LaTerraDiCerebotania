@@ -1,8 +1,15 @@
 package utils;
+import java.awt.FlowLayout;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 import Item.Item;
 //NICA
+
 // Definizione della classe giocatore
 public class Player {
 
@@ -74,5 +81,15 @@ public class Player {
     
     public void setBackpack(List<Item> backpack) {
         this.backpack = backpack;
+    }
+    // Metodo per creare item su mappa
+    public void spawnOgg(ImageIcon[] itemIcon, JLabel[] itemLabel, JPanel[] itemPanel, JLayeredPane layeredPane, Item obj, int i) {
+        itemIcon[i] = new ImageIcon(itemIcon[i].getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
+        itemLabel[i] = new JLabel(itemIcon[i]);
+        itemPanel[i] = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        itemPanel[i].setOpaque(false);
+        itemPanel[i].add(itemLabel[i]);
+        itemPanel[i].setBounds(obj.rndX(), obj.rndY(), 64, 64);
+        layeredPane.add(itemPanel[i], JLayeredPane.PALETTE_LAYER);
     }
 }
