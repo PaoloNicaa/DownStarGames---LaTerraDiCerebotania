@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
 import java.util.Random;
 
 import utils.Player;
+import utils.PopUp;
 import Item.Mela;
 import Item.Stivali;
 import Item.Spada;
@@ -43,7 +44,8 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
 
         // Caricamento immagine sfondo
         ImageIcon backgroundIcon = new ImageIcon(getClass().getResource("background.png"));
-        backgroundLabel = new JLabel(backgroundIcon);
+        Image backgroundImage = backgroundIcon.getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
+        backgroundLabel = new JLabel(new ImageIcon(backgroundImage));
         backgroundLabel.setSize(getSize());
 
         // Creazione pannello layered
@@ -204,7 +206,12 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
 
             game.setIconImage(image);
             game.setVisible(true);
-            
+
+            Random random = new Random();
+            int popup = random.nextInt(0,5); // 1 possibilita su 5 per far partire la pubblicita di grubhub
+            if (popup == 1) {
+                new PopUp();
+            }
         });
     }
 }
