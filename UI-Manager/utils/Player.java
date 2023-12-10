@@ -8,13 +8,14 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+
 import Item.Item;
 
 //NICA
 
 // Definizione della classe giocatore
 public class Player {
-
+    
     protected int pesoMax = 100;
     protected int stepRimanenti = 50;
     protected int pesoAttuale = 0;
@@ -57,15 +58,16 @@ public class Player {
         layeredPane.add(itemPanel[i], JLayeredPane.PALETTE_LAYER);
     }
 
-    public String collectItem(Item item) {
+    public boolean collectItem(Item item) { // boolean cosi nel main controllo se il peso soddisfa i requisiti
         if (pesoAttuale + item.getPeso() <= pesoMax) {
             backpack.add(item);
             pesoAttuale += item.getPeso();
             valoreOgg += item.getValore();
-            return "L'oggetto " + item.getName() + " e' stato aggiunto all'inventario!";
+
+            return true;
         }
         else {
-            return "L'oggetto " + item.getName() + " non può essere aggiunto allo zaino perché supera il peso massimo";
+            return false; 
         }
     }
 
@@ -121,8 +123,8 @@ public class Player {
     
     
     // Metodo per trovare l'item più vicino al giocatore
-    public Item findClosestItem(List<Item> itemLista) {
-        double minDistance = Double.MAX_VALUE;
+    public Item findClosestItem(List<Item> itemLista, double maxDistance ) {
+        double minDistance = maxDistance;
         Item closestItem = null;
     
         for (Item currentItem : itemLista) { 
@@ -130,6 +132,10 @@ public class Player {
             if (distance < minDistance) {
                 minDistance = distance;
                 closestItem = currentItem;
+            }
+
+            if(minDistance > maxDistance) {
+                return null;
             }
         }
         return closestItem;

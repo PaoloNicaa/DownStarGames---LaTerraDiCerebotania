@@ -63,8 +63,6 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         //Coordinate per giocatore al centro
         playerX = (getWidth() - playerIcon.getIconWidth()) / 2;
         playerY = (getHeight() - playerIcon.getIconHeight()) / 2;
-        player.setX(playerX);
-        player.setY(playerY);
 
         // Creazione pannello giocatore con layout manager FlowLayout
         playerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
@@ -187,31 +185,47 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             GruppoMove();
             aggText();
             playerY -= 20;
+            player.setY(playerY); // Riaggiorno la y
             playerLabel.setIcon(playerIcon);
         } else if (key == KeyEvent.VK_A) {
             playerIcon = new ImageIcon(getClass().getResource("playerRun.gif"));
             GruppoMove();
             aggText();
             playerX -= 20;
+            player.setX(playerX); //Riaggiorno la x
             playerLabel.setIcon(playerIcon);
         } else if (key == KeyEvent.VK_S) {
             playerIcon = new ImageIcon(getClass().getResource("playerRun.gif"));
             GruppoMove();
             aggText();
-            playerY += 20;
+            playerY += 20; // Riaggiorno la y
+            player.setY(playerY);
             playerLabel.setIcon(playerIcon);
         } else if (key == KeyEvent.VK_D) {
             playerIcon = new ImageIcon(getClass().getResource("playerRun.gif"));
             GruppoMove();
             aggText();
-            playerX += 20;
+            playerX += 20; //Riaggiorno la x
+            player.setX(playerX); 
             playerLabel.setIcon(playerIcon);
         } else if (key == KeyEvent.VK_E) {
-            Item closestItem = player.findClosestItem(itemLista); // Implementa questo metodo per trovare l'oggetto più vicino
-            if (closestItem != null) {
-                testoLabel.setText("<html><div style='text-align: center;'>" + player.collectItem(closestItem));
-                layeredPane.remove(itemLista.indexOf(closestItem));
+            Item closestItem = player.findClosestItem(itemLista, 100.0);
+            System.out.println("Closest Item: " + closestItem + " " + player.getX() + " " + player.getY()); // Controllo in console cosa ritorna
+            if (closestItem != null) {  // Controlla se ci sono oggetti vicini
+                if (player.collectItem(closestItem) == true) {  // Controlla se ci sta nello zaino
+                    testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!");
+                    layeredPane.remove(itemLista.indexOf(closestItem));
+                }
+                else{
+                    testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " non può essere aggiunto allo zaino perché supera il peso massimo");
+                    getText();
+                }
+                
             }
+            else { 
+                testoLabel.setText("<html><div style='text-align: center;'>" + "Non ci sono oggetti vicini");
+            }
+
         } else if (key == KeyEvent.VK_ESCAPE) {
             System.exit(0);
         }
