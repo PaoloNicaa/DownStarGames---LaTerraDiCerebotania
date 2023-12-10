@@ -9,6 +9,7 @@ public abstract class Item {
     private int peso;
     private int valore;
     private String tipoRarita;
+    private int x, y;
 
     public Item(String name, String tipoRarita, int valore, int peso) {
         this.name = name;
@@ -34,25 +35,31 @@ public abstract class Item {
     }
 
     public int rndX() {
-        int x = 0;
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         Random random = new Random();
         x = random.nextInt(0, ((int)size.getWidth()));
         if (x > (size.getWidth() - 64)) { // Controllo per evitare che gli item si generino al di fuori della mappa
             x -= 64;
         }
-        return x;
+        return this.x;
     } 
 
     public int rndY() {
-        int y = 0;
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         Random random = new Random();
         y = random.nextInt(0, ((int)size.getHeight()));
         if (y > (size.getHeight() - 64)) { // Controllo per evitare che gli item si generino al di fuori della mappa
             y -= 64;
         }
-        return y;
+        return this.y;
+    }
+
+    public int getItemX() {
+        return this.x;
+    }
+
+    public int getItemY() {
+        return this.y;
     }
 
     public Item spawnItem () {

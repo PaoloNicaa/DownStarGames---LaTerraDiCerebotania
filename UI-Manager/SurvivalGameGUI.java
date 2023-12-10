@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
 import java.util.List;
+import java.util.ArrayList;
 
 import utils.Player;
 import utils.PopUp;
@@ -12,7 +13,6 @@ import Item.Spada;
 import Item.Coppa;
 import Item.Item;
 import Item.Anello;
-import java.util.ArrayList;
 
 public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListener {
     private JLayeredPane layeredPane;
@@ -33,6 +33,8 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
     private void aggText() {
         testoLabel.setText(getText());
     }
+
+    
 
     public SurvivalGameGUI() {
         setTitle("Survival Game");
@@ -75,84 +77,43 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         ImageIcon[] itemIcon = new ImageIcon[15];
         JLabel[] itemLabel = new JLabel[15];
         JPanel[] itemPanel = new JPanel[15];
-
-        // Ciclo for per spawn random degli oggetti
         itemLista = new ArrayList<>();
+        // Ciclo for per spawn random degli oggetti
         for (int i = 0; i < 15; i++) {
-            int rnd = random.nextInt(5);
+            int rnd = random.nextInt(0,5);
             if(rnd == 0) {
                 Mela mela = new Mela();
                 mela.spawnItem();
-                
                 itemIcon[i] = new ImageIcon(getClass().getResource("mela.png"));
-                itemIcon[i] = new ImageIcon(itemIcon[i].getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
-                itemLabel[i] = new JLabel(itemIcon[i]);
-                itemPanel[i] = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-                itemPanel[i].setOpaque(false);
-                itemPanel[i].add(itemLabel[i]);
-                itemPanel[i].setBounds(mela.rndX(), mela.rndY(), 64, 64);
-                layeredPane.add(itemPanel[i], JLayeredPane.PALETTE_LAYER);
-                
+                player.spawnOgg(itemIcon, itemLabel, itemPanel, layeredPane, mela, i);
                 itemLista.add(mela);
             }
             else if(rnd == 1) {
                 Stivali stivali = new Stivali();
                 stivali.spawnItem();
-                
                 itemIcon[i] = new ImageIcon(getClass().getResource("stivali.png"));
-                itemIcon[i] = new ImageIcon(itemIcon[i].getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
-                itemLabel[i] = new JLabel(itemIcon[i]);
-                itemPanel[i] = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-                itemPanel[i].setOpaque(false);
-                itemPanel[i].add(itemLabel[i]);
-                itemPanel[i].setBounds(stivali.rndX(), stivali.rndY(), 64, 64);
-                layeredPane.add(itemPanel[i], JLayeredPane.PALETTE_LAYER);
-                
+                player.spawnOgg(itemIcon, itemLabel, itemPanel, layeredPane, stivali, i);
                 itemLista.add(stivali);
             }
             else if(rnd == 2) {
                 Spada spada = new Spada();
                 spada.spawnItem();
-                
                 itemIcon[i] = new ImageIcon(getClass().getResource("spada.png"));
-                itemIcon[i] = new ImageIcon(itemIcon[i].getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
-                itemLabel[i] = new JLabel(itemIcon[i]);
-                itemPanel[i] = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-                itemPanel[i].setOpaque(false);
-                itemPanel[i].add(itemLabel[i]);
-                itemPanel[i].setBounds(spada.rndX(), spada.rndY(), 64, 64);
-                layeredPane.add(itemPanel[i], JLayeredPane.PALETTE_LAYER);
-                
+                player.spawnOgg(itemIcon, itemLabel, itemPanel, layeredPane, spada, i);
                 itemLista.add(spada);
             }
             else if(rnd == 3) {
                 Coppa coppa = new Coppa();
                 coppa.spawnItem();
-                
                 itemIcon[i] = new ImageIcon(getClass().getResource("coppa.png"));
-                itemIcon[i] = new ImageIcon(itemIcon[i].getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
-                itemLabel[i] = new JLabel(itemIcon[i]);
-                itemPanel[i] = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-                itemPanel[i].setOpaque(false);
-                itemPanel[i].add(itemLabel[i]);
-                itemPanel[i].setBounds(coppa.rndX(), coppa.rndY(), 64, 64);
-                layeredPane.add(itemPanel[i], JLayeredPane.PALETTE_LAYER);
-                
+                player.spawnOgg(itemIcon, itemLabel, itemPanel, layeredPane, coppa, i);
                 itemLista.add(coppa);
             }
             else if(rnd == 4) {
                 Anello anello = new Anello();
                 anello.spawnItem();
-                
                 itemIcon[i] = new ImageIcon(getClass().getResource("anello.png"));
-                itemIcon[i] = new ImageIcon(itemIcon[i].getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
-                itemLabel[i] = new JLabel(itemIcon[i]);
-                itemPanel[i] = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-                itemPanel[i].setOpaque(false);
-                itemPanel[i].add(itemLabel[i]);
-                itemPanel[i].setBounds(anello.rndX(), anello.rndY(), 64, 64);
-                layeredPane.add(itemPanel[i], JLayeredPane.PALETTE_LAYER);
-                
+                player.spawnOgg(itemIcon, itemLabel, itemPanel, layeredPane, anello, i);
                 itemLista.add(anello);
             }
         }

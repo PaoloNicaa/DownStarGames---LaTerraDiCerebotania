@@ -1,5 +1,6 @@
 package utils;
-import java.awt.*;
+import java.awt.FlowLayout;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -21,8 +22,7 @@ public class Player {
     protected List<Item> backpack = new ArrayList<>();
     private int x;
     private int y;
-    private Item ultimoItemRaccolto;
-
+    
     public void setX(int x) {
         this.x = x;
     }
@@ -47,12 +47,21 @@ public class Player {
         stepRimanenti--;
     }
 
+    public void spawnOgg(ImageIcon[] itemIcon, JLabel[] itemLabel, JPanel[] itemPanel, JLayeredPane layeredPane, Item obj, int i) {
+        itemIcon[i] = new ImageIcon(itemIcon[i].getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
+        itemLabel[i] = new JLabel(itemIcon[i]);
+        itemPanel[i] = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        itemPanel[i].setOpaque(false);
+        itemPanel[i].add(itemLabel[i]);
+        itemPanel[i].setBounds(obj.rndX(), obj.rndY(), 64, 64);
+        layeredPane.add(itemPanel[i], JLayeredPane.PALETTE_LAYER);
+    }
+
     public String collectItem(Item item) {
         if (pesoAttuale + item.getPeso() <= pesoMax) {
             backpack.add(item);
             pesoAttuale += item.getPeso();
             valoreOgg += item.getValore();
-            ultimoItemRaccolto = item;
             return "L'oggetto " + item.getName() + " e' stato aggiunto all'inventario!";
         }
         else {
@@ -103,17 +112,7 @@ public class Player {
     public void setBackpack(List<Item> backpack) {
         this.backpack = backpack;
     }
-    
-    // Metodo per creare item su mappa
-    public void spawnOgg(ImageIcon[] itemIcon, JLabel[] itemLabel, JPanel[] itemPanel, JLayeredPane layeredPane, Item obj, int i) {
-        itemIcon[i] = new ImageIcon(itemIcon[i].getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
-        itemLabel[i] = new JLabel(itemIcon[i]);
-        itemPanel[i] = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-        itemPanel[i].setOpaque(false);
-        itemPanel[i].add(itemLabel[i]);
-        itemPanel[i].setBounds(obj.rndX(), obj.rndY(), 64, 64);
-        layeredPane.add(itemPanel[i], JLayeredPane.PALETTE_LAYER);
-    }
+
 
     // Metodo per calcolare la distanza tra due punti
     private double calculateDistance(int x1, int y1, int x2, int y2) {
@@ -127,13 +126,12 @@ public class Player {
         Item closestItem = null;
     
         for (Item currentItem : itemLista) { 
-            double distance = calculateDistance(getX(), getY(), currentItem.rndX(), currentItem.rndY());
+            double distance = calculateDistance(getX(), getY(), currentItem.getItemX(), currentItem.getItemY());
             if (distance < minDistance) {
                 minDistance = distance;
                 closestItem = currentItem;
             }
         }
-    
         return closestItem;
     }
 }
