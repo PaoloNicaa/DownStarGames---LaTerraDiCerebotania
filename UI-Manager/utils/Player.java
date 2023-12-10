@@ -58,7 +58,7 @@ public class Player {
         layeredPane.add(itemPanel[i], JLayeredPane.PALETTE_LAYER);
     }
 
-    public boolean collectItem(Item item) { // boolean cosi nel main controllo se il peso soddisfa i requisiti
+    public boolean collectItem(Item item) { // Boolean cosi nel main controllo se il peso soddisfa i requisiti
         if (pesoAttuale + item.getPeso() <= pesoMax) {
             backpack.add(item);
             pesoAttuale += item.getPeso();
@@ -118,7 +118,11 @@ public class Player {
 
     // Metodo per calcolare la distanza tra due punti
     private double calculateDistance(int x1, int y1, int x2, int y2) {
-        return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+        double distance = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+        
+        System.out.println("Distanza tra due punti: " + distance); // Controllo per la console
+        
+        return distance;
     }
     
     
@@ -129,6 +133,7 @@ public class Player {
     
         for (Item currentItem : itemLista) { 
             double distance = calculateDistance(getX(), getY(), currentItem.getItemX(), currentItem.getItemY());
+            System.out.println("x e y di CurrentItem: " + currentItem.getItemX() + " " + currentItem.getItemY()); // Controllo per la console
             if (distance < minDistance) {
                 minDistance = distance;
                 closestItem = currentItem;

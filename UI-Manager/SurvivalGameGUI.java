@@ -85,6 +85,8 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
                 itemIcon[i] = new ImageIcon(getClass().getResource("mela.png"));
                 player.spawnOgg(itemIcon, itemLabel, itemPanel, layeredPane, mela, i);
                 itemLista.add(mela);
+                
+                System.out.println("mela: " + mela.getItemX() + " " + mela.getItemY()); // Controllo in console cosa ritorna
             }
             else if(rnd == 1) {
                 Stivali stivali = new Stivali();
@@ -92,6 +94,8 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
                 itemIcon[i] = new ImageIcon(getClass().getResource("stivali.png"));
                 player.spawnOgg(itemIcon, itemLabel, itemPanel, layeredPane, stivali, i);
                 itemLista.add(stivali);
+
+                System.out.println("stivali: " + stivali.getItemX() + " " + stivali.getItemY()); // Controllo in console cosa ritorna
             }
             else if(rnd == 2) {
                 Spada spada = new Spada();
@@ -99,6 +103,8 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
                 itemIcon[i] = new ImageIcon(getClass().getResource("spada.png"));
                 player.spawnOgg(itemIcon, itemLabel, itemPanel, layeredPane, spada, i);
                 itemLista.add(spada);
+
+                System.out.println("spada: " + spada.getItemX() + " " + spada.getItemY()); // Controllo in console cosa ritorna
             }
             else if(rnd == 3) {
                 Coppa coppa = new Coppa();
@@ -106,6 +112,8 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
                 itemIcon[i] = new ImageIcon(getClass().getResource("coppa.png"));
                 player.spawnOgg(itemIcon, itemLabel, itemPanel, layeredPane, coppa, i);
                 itemLista.add(coppa);
+
+                System.out.println("coppa: " + coppa.getItemX() + " " + coppa.getItemY()); // Controllo in console cosa ritorna
             }
             else if(rnd == 4) {
                 Anello anello = new Anello();
@@ -113,6 +121,8 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
                 itemIcon[i] = new ImageIcon(getClass().getResource("anello.png"));
                 player.spawnOgg(itemIcon, itemLabel, itemPanel, layeredPane, anello, i);
                 itemLista.add(anello);
+
+                System.out.println("anello: " + anello.getItemX() + " " + anello.getItemY()); // Controllo in console cosa ritorna
             }
         }
 
@@ -149,14 +159,6 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         });
     }
 
-    public int playerGetX() {
-        return playerX;
-    }
-
-    public int playerGetY() {
-        return playerY;
-    }
-
     public void GruppoMove() {
         if(player.canMove()) {
             player.movimento();
@@ -185,6 +187,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             GruppoMove();
             aggText();
             playerY -= 20;
+            // DA FARE Controllo per la y per evitare che il giocatore esca dalla mappa
             player.setY(playerY); // Riaggiorno la y
             playerLabel.setIcon(playerIcon);
         } else if (key == KeyEvent.VK_A) {
@@ -199,6 +202,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             GruppoMove();
             aggText();
             playerY += 20; // Riaggiorno la y
+            // DA FARE Controllo per la y per evitare che il giocatore esca dalla mappa
             player.setY(playerY);
             playerLabel.setIcon(playerIcon);
         } else if (key == KeyEvent.VK_D) {
@@ -209,8 +213,8 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             player.setX(playerX); 
             playerLabel.setIcon(playerIcon);
         } else if (key == KeyEvent.VK_E) {
-            Item closestItem = player.findClosestItem(itemLista, 100.0);
-            System.out.println("Closest Item: " + closestItem + " " + player.getX() + " " + player.getY()); // Controllo in console cosa ritorna
+            Item closestItem = player.findClosestItem(itemLista, 150.0);
+            System.out.println("Closest Item: " + closestItem + ", x e y del player: " + player.getX() + " " + player.getY() + "\n"); // Controllo in console cosa ritorna
             if (closestItem != null) {  // Controlla se ci sono oggetti vicini
                 if (player.collectItem(closestItem) == true) {  // Controlla se ci sta nello zaino
                     testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!");
