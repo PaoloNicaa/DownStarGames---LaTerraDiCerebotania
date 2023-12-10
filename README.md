@@ -1,12 +1,12 @@
 # DownStarGames---SurvivalGame
 
 --- DA AGGIUNGERE ---
-1. Terminare metodo per raccolta oggetti da usare in SurvivalGameGUI riga 190.
+1. Sistemare metodo per raccolta oggetti, funziona ma si ha il problema delle coordinate relative.
 2. Agginta di un message dialog funzionante come visualizzatore di inventario.
 3. Aggingere che dopo la raccolta degli stivali le mosse aumentano di 10 o piu.
-
+4. Controllo per quando si supera la y del monitor
+5. Appena abbiamo finito tutto cercare di rendere piu bello possibile il codice e suddividere meglio i file e le cartelle
 
 --- CONSIGLI ---
+nell'inventario se è possibile far visualizzare le icone degli item e sotto il numero di quanti se ne ha
 
-Per il metodo raccolta oggetti prendere le coordinate attuali del player e dell'item a cui è piu vicino e se la differenza è tra 0 e 50 l'item verra aggiunto all'inventario,
-questa logica andra implementata nel metodo player.collectItem che viene gia utilizzato nella GUI.
