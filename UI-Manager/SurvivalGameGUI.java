@@ -191,7 +191,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             player.setY(playerY); // Riaggiorno la y
             playerLabel.setIcon(playerIcon);
         } else if (key == KeyEvent.VK_A) {
-            playerIcon = new ImageIcon(getClass().getResource("playerRun.gif"));
+            playerIcon = new ImageIcon(getClass().getResource("playerRunSx.gif"));
             GruppoMove();
             aggText();
             playerX -= 20;
