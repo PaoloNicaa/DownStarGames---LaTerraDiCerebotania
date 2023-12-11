@@ -7,13 +7,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-
-
 import Item.Item;
 
 //NICA
 
-// Definizione della classe giocatore
 public class Player {
     
     protected int pesoMax = 100;
@@ -59,14 +56,16 @@ public class Player {
     }
 
     public boolean collectItem(Item item) { // Boolean cosi nel main controllo se il peso soddisfa i requisiti
-        if (pesoAttuale + item.getPeso() <= pesoMax) {
+        if (pesoAttuale + item.getPeso() <= pesoMax)
+        {
             backpack.add(item);
             pesoAttuale += item.getPeso();
             valoreOgg += item.getValore();
 
             return true;
         }
-        else {
+        else
+        {
             return false; 
         }
     }
@@ -114,8 +113,6 @@ public class Player {
     public void setBackpack(List<Item> backpack) {
         this.backpack = backpack;
     }
-
-
     // Metodo per calcolare la distanza tra due punti
     private double calculateDistance(int x1, int y1, int x2, int y2) {
         int distance = (int) Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
@@ -124,22 +121,23 @@ public class Player {
         
         return distance;
     }
-    
-    
     // Metodo per trovare l'item più vicino al giocatore
     public Item findClosestItem(List<Item> itemLista, int maxDistance ) {
         int minDistance = maxDistance;
         Item closestItem = null;
     
-        for (Item currentItem : itemLista) { 
+        for (Item currentItem : itemLista)
+        { 
             int distance = (int) calculateDistance(getX(), getY(), currentItem.getItemX(), currentItem.getItemY());
             System.out.println("x e y di CurrentItem: " + currentItem.getItemX() + " " + currentItem.getItemY()); // Controllo per la console
-            if (distance < minDistance) {
+            if (distance < minDistance)
+            {
                 minDistance = distance;
                 closestItem = currentItem;
             }
 
-            if(minDistance > maxDistance) {
+            if(minDistance > maxDistance)
+            {
                 return null;
             }
         }

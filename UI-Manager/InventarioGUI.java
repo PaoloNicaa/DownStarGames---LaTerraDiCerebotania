@@ -1,4 +1,3 @@
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -27,10 +26,8 @@ public class InventarioGUI  extends JFrame implements KeyListener {
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
-
         addKeyListener(this);
         setFocusable(true);
-        setFocusTraversalKeysEnabled(false);
 
         Player player = new Player();
         if(player.getBackpack() instanceof Mela) {
@@ -62,8 +59,6 @@ public class InventarioGUI  extends JFrame implements KeyListener {
 
         layeredPane = new JLayeredPane();
         layeredPane.setPreferredSize(getSize());
-
-        // Aggiunta sfondo al livello 0
         layeredPane.add(backgroundLabel, JLayeredPane.DEFAULT_LAYER);
 
         ImageIcon IconMela = new ImageIcon(getClass().getResource("mela.png"));
@@ -71,7 +66,6 @@ public class InventarioGUI  extends JFrame implements KeyListener {
         JLabel LabelMela = new JLabel(IconMela);
         int X = 50;
         int melaY = 50;
-
         JPanel PanelMela = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         PanelMela.setSize(IconMela.getIconWidth(), IconMela.getIconHeight());
         PanelMela.setOpaque(false);
@@ -81,7 +75,6 @@ public class InventarioGUI  extends JFrame implements KeyListener {
         IconStivali = new ImageIcon(IconStivali.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
         JLabel LabelStivali = new JLabel(IconStivali);
         int stivaliY = 175;
-
         JPanel PanelStivali = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         PanelStivali.setSize(IconStivali.getIconWidth(), IconStivali.getIconHeight());
         PanelStivali.setOpaque(false);
@@ -91,7 +84,6 @@ public class InventarioGUI  extends JFrame implements KeyListener {
         IconSpada = new ImageIcon(IconSpada.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
         JLabel LabelSpada = new JLabel(IconSpada);
         int spadaY = 285;
-
         JPanel PanelSpada = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         PanelSpada.setSize(IconSpada.getIconWidth(), IconSpada.getIconHeight());
         PanelSpada.setOpaque(false);
@@ -102,7 +94,6 @@ public class InventarioGUI  extends JFrame implements KeyListener {
         JLabel LabelCoppa = new JLabel(IconCoppa);
         int coppaX = 162;
         int coppaY = 50;
-
         JPanel PanelCoppa = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         PanelCoppa.setSize(IconCoppa.getIconWidth(), IconCoppa.getIconHeight());
         PanelCoppa.setOpaque(false);
@@ -113,7 +104,6 @@ public class InventarioGUI  extends JFrame implements KeyListener {
         JLabel LabelAnello = new JLabel(IconAnello);
         int anelloX = 162;
         int anelloY = 175;
-
         JPanel PanelAnello = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         PanelAnello.setSize(IconAnello.getIconWidth(), IconAnello.getIconHeight());
         PanelAnello.setOpaque(false);

@@ -19,19 +19,19 @@ public abstract class Item {
     }
 
     public int getPeso() {
-       return this.peso;
+       return peso;
     }
       
     public int getValore() {
-       return this.valore;
+       return valore;
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public String getRarita() {
-        return this.tipoRarita;
+        return tipoRarita;
     }
 
     public int rndX() {
@@ -41,7 +41,7 @@ public abstract class Item {
         if (x > (size.getWidth() - 64)) { // Controllo per evitare che gli item si generino al di fuori della mappa
             x -= 64;
         }
-        return this.x;
+        return x;
     } 
 
     public int rndY() {
@@ -51,15 +51,15 @@ public abstract class Item {
         if (y > (size.getHeight() - 64)) { // Controllo per evitare che gli item si generino al di fuori della mappa
             y -= 64;
         }
-        return this.y;
+        return y;
     }
 
     public int getItemX() {
-        return this.x;
+        return x;
     }
 
     public int getItemY() {
-        return this.y;
+        return y;
     }
 
     public Item spawnItem () {
