@@ -228,6 +228,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
                     }
                     else if (closestItem instanceof Stivali) {
                         stivali++;
+                        player.setStepRimanenti((player.getStepRimanenti()+10));
                     }
                     else if (closestItem instanceof Spada) {
                         spada++;
@@ -239,7 +240,9 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
                         anello++;
                     }
                     testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!");
-                    layeredPane.remove(itemLista.indexOf(closestItem));
+                    if (itemLista.indexOf(closestItem) != -1) { // Controllo per evitare che elimini il player o lo sfondo
+                        layeredPane.remove(itemLista.indexOf(closestItem));
+                    }
                     itemLista.remove(closestItem);
                 }
                 else {
