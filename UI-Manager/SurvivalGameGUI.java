@@ -40,6 +40,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         setTitle("Survival Game");
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); //Funzione per ottenere risoluzione dello schermo
         setSize((int)size.getWidth(), (int)size.getHeight());
+        setResizable(false);
         setExtendedState(JFrame.MAXIMIZED_BOTH); //Frame a schermo intero
         setUndecorated(true); //True per togliere la barra sopra del frame - False per metterla
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -137,7 +138,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
 
         // Posiziona giocatore al livello 1
         playerPanel.setBounds(playerX, playerY, playerIcon.getIconWidth(), playerIcon.getIconHeight());
-        layeredPane.add(playerPanel, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(playerPanel, JLayeredPane.MODAL_LAYER);
         layeredPane.add(testoLabel, JLayeredPane.MODAL_LAYER);
 
         add(layeredPane);
@@ -171,7 +172,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
 
     public void actionPerformed(ActionEvent e) {
         // Aggiorna la posizione del giocatore
-        playerPanel.setBounds(playerX, (playerY-200), playerPanel.getWidth(), playerPanel.getHeight());
+        playerPanel.setBounds(playerX, playerY, playerPanel.getWidth(), playerPanel.getHeight());
         revalidate();
         repaint();
     }
@@ -213,7 +214,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             player.setX(playerX); 
             playerLabel.setIcon(playerIcon);
         } else if (key == KeyEvent.VK_E) {
-            Item closestItem = player.findClosestItem(itemLista, -100.0);
+            Item closestItem = player.findClosestItem(itemLista, 100);
             System.out.println("Closest Item: " + closestItem + ", x e y del player: " + player.getX() + " " + player.getY() + "\n"); // Controllo in console cosa ritorna
             if (closestItem != null) {  // Controlla se ci sono oggetti vicini
                 if (player.collectItem(closestItem) == true) {  // Controlla se ci sta nello zaino

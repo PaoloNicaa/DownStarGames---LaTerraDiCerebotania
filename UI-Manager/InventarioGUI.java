@@ -140,6 +140,8 @@ public class InventarioGUI  extends JFrame implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
         if (key == KeyEvent.VK_I) {
+            revalidate();
+            repaint();
             dispose();
         }
     }

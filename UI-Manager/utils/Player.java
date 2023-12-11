@@ -29,7 +29,7 @@ public class Player {
     }
 
     public int getX() {
-        return this.x;
+        return x;
     }
 
     public void setY(int y) {
@@ -37,7 +37,7 @@ public class Player {
     }
 
     public int getY() {
-        return this.y;
+        return y;
     }
 
     public boolean canMove() {
@@ -76,23 +76,23 @@ public class Player {
     }
 
     public int getPesoMax() {
-        return this.pesoMax;
+        return pesoMax;
         }
     
     public int getStepRimanenti() {
-        return this.stepRimanenti;
+        return stepRimanenti;
     }
     
     public int getPesoAttuale() {
-        return this.pesoAttuale;
+        return pesoAttuale;
     }
     
     public int getValoreOgg() {
-        return this.valoreOgg;
+        return valoreOgg;
     }
     
     public List<Item> getBackpack() {
-        return this.backpack;
+        return backpack;
     }
     
     public void setPesoMax(int pesoMax) {
@@ -118,7 +118,7 @@ public class Player {
 
     // Metodo per calcolare la distanza tra due punti
     private double calculateDistance(int x1, int y1, int x2, int y2) {
-        double distance = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+        int distance = (int) Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
         
         System.out.println("Distanza tra due punti: " + distance); // Controllo per la console
         
@@ -127,12 +127,12 @@ public class Player {
     
     
     // Metodo per trovare l'item più vicino al giocatore
-    public Item findClosestItem(List<Item> itemLista, double maxDistance ) {
-        double minDistance = maxDistance;
+    public Item findClosestItem(List<Item> itemLista, int maxDistance ) {
+        int minDistance = maxDistance;
         Item closestItem = null;
     
         for (Item currentItem : itemLista) { 
-            double distance = calculateDistance(getX(), getY(), currentItem.getItemX(), currentItem.getItemY());
+            int distance = (int) calculateDistance(getX(), getY(), currentItem.getItemX(), currentItem.getItemY());
             System.out.println("x e y di CurrentItem: " + currentItem.getItemX() + " " + currentItem.getItemY()); // Controllo per la console
             if (distance < minDistance) {
                 minDistance = distance;
