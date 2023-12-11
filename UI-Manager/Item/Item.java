@@ -37,7 +37,7 @@ public abstract class Item {
     public int rndX() {
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         Random random = new Random();
-        x = random.nextInt(0, ((int)size.getWidth()));
+        x = random.nextInt(((int)size.getWidth()));
         if (x > (size.getWidth() - 64)) { // Controllo per evitare che gli item si generino al di fuori della mappa
             x -= 64;
         }
@@ -47,7 +47,7 @@ public abstract class Item {
     public int rndY() {
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         Random random = new Random();
-        y = random.nextInt(0, ((int)size.getHeight()));
+        y = random.nextInt(((int)size.getHeight()));
         if (y > (size.getHeight() - 64)) { // Controllo per evitare che gli item si generino al di fuori della mappa
             y -= 64;
         }

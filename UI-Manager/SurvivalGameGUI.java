@@ -27,7 +27,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
 
     // Testo con formattazzione html cosi è bello
     private String getText() {
-        return "<html><div style='text-align: center;'>- W A S D per muoversi<br>- ESC per uscire<br>- E per raccogliere oggetti<br><br>Mosse Rimanenti: " + player.getStepRimanenti() + "</div></html>";
+        return "<html><div style='text-align: center;'>- W A S D per muoversi<br>- ESC per uscire<br>- E per raccogliere oggetti<br>- I per aprire inventario<br><br>Mosse Rimanenti: " + player.getStepRimanenti() + "</div></html>";
     }
     // Funzione per aggiornare il counter dei passi rimanenti nel testo
     private void aggText() {
@@ -78,7 +78,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         itemLista = new ArrayList<>();
         // Ciclo for per spawn random degli oggetti
         for (int i = 0; i < 15; i++) {
-            int rnd = random.nextInt(0,5);
+            int rnd = random.nextInt(5);
             if(rnd == 0) {
                 Mela mela = new Mela();
                 mela.spawnItem();
@@ -164,7 +164,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             player.movimento();
         }
         else {
-            JOptionPane.showMessageDialog(null, "              Game Over!\n  Valore Oggetti totalizzato: " + player.getValoreOgg(),"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "              Game Over!\n  Valore Oggetti totalizzato: " + player.getValoreOgg(),"____________________________________________", JOptionPane.INFORMATION_MESSAGE);
             System.exit(0);
         }
     }
@@ -213,7 +213,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             player.setX(playerX); 
             playerLabel.setIcon(playerIcon);
         } else if (key == KeyEvent.VK_E) {
-            Item closestItem = player.findClosestItem(itemLista, 150.0);
+            Item closestItem = player.findClosestItem(itemLista, -100.0);
             System.out.println("Closest Item: " + closestItem + ", x e y del player: " + player.getX() + " " + player.getY() + "\n"); // Controllo in console cosa ritorna
             if (closestItem != null) {  // Controlla se ci sono oggetti vicini
                 if (player.collectItem(closestItem) == true) {  // Controlla se ci sta nello zaino
@@ -230,6 +230,9 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
                 testoLabel.setText("<html><div style='text-align: center;'>" + "Non ci sono oggetti vicini");
             }
 
+        } else if (key == KeyEvent.VK_I) {
+            InventarioGUI invGUI = new InventarioGUI();
+            invGUI.setVisible(true);
         } else if (key == KeyEvent.VK_ESCAPE) {
             System.exit(0);
         }
@@ -241,14 +244,16 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> { // InvokeLater serve per gli aggiornamenti alla gui costanti
             SurvivalGameGUI game = new SurvivalGameGUI();
+            InventarioGUI invGUI = new InventarioGUI();
             ImageIcon iconaFrame = new ImageIcon(SurvivalGameGUI.class.getResource("icon.png"));
             Image image = iconaFrame.getImage();
 
             game.setIconImage(image);
+            invGUI.setIconImage(image);
             game.setVisible(true);
 
             Random random = new Random();
-            int popup = random.nextInt(0,5); // 1 possibilita su 5 per far partire la pubblicita di grubhub
+            int popup = random.nextInt(5); // 1 possibilita su 5 per far partire la pubblicita di grubhub
             if (popup == 1) {
                 new PopUp();
             }
