@@ -2,22 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import utils.Player;
-import Item.Mela;
-import Item.Stivali;
-import Item.Spada;
-import Item.Coppa;
-import Item.Anello;
 
 public class InventarioGUI  extends JFrame implements KeyListener {
     private JLayeredPane layeredPane;
-    private int mele = 0;
-    private int stivali = 0;
-    private int spade = 0;
-    private int coppe = 0;
-    private int anelli = 0;
 
-    public InventarioGUI() {
+    public InventarioGUI(int mele, int stivali, int spade, int coppe, int anelli) {
         setTitle("Inventario");
         setSize(500,400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,19 +17,6 @@ public class InventarioGUI  extends JFrame implements KeyListener {
         setVisible(true);
         addKeyListener(this);
         setFocusable(true);
-
-        Player player = new Player();
-        if(player.getBackpack() instanceof Mela) {
-            mele++;
-        } else if (player.getBackpack() instanceof Stivali) {
-            stivali++;
-        } else if (player.getBackpack() instanceof Spada) {
-            spade++;
-        } else if (player.getBackpack() instanceof Coppa) {
-            coppe++;
-        } else if (player.getBackpack() instanceof Anello) {
-            anelli++;
-        }
 
         JLabel itemLabel1 = new JLabel("<html>" + mele + "<br><br><br><br>" + stivali + "<br><br><br><br>" + spade + "</html>");
         itemLabel1.setFont(new Font("Arial", Font.BOLD, 24));

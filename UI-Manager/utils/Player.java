@@ -58,10 +58,10 @@ public class Player {
     public boolean collectItem(Item item) { // Boolean cosi nel main controllo se il peso soddisfa i requisiti
         if (pesoAttuale + item.getPeso() <= pesoMax)
         {
+            System.out.println("Contenuto dello zaino: " + getBackpack());
             backpack.add(item);
             pesoAttuale += item.getPeso();
             valoreOgg += item.getValore();
-
             return true;
         }
         else

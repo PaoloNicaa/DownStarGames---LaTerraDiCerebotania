@@ -24,6 +24,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
     private int playerX;
     private int playerY;
     private List<Item> itemLista;
+    private int mela,stivali,spada,coppa,anello;
     Player player = new Player();
 
     public String getText() {
@@ -218,14 +219,30 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         }
         else if (key == KeyEvent.VK_E)
         {
-            Item closestItem = player.findClosestItem(itemLista, 100);
+            Item closestItem = player.findClosestItem(itemLista, 400); // Distanza molto aumentata per via di bug coordinate
             System.out.println("Closest Item: " + closestItem + ", x e y del player: " + player.getX() + " " + player.getY() + "\n"); // Controllo in console cosa ritorna
             if (closestItem != null) {  // Controlla se ci sono oggetti vicini
-                if (player.collectItem(closestItem) == true) {  // Controlla se ci sta nello zaino
+                if (player.collectItem(closestItem) == true) {  // Controlla se ci sta nello zaino                    
+                    if (closestItem instanceof Mela) {
+                        mela++;
+                    }
+                    else if (closestItem instanceof Stivali) {
+                        stivali++;
+                    }
+                    else if (closestItem instanceof Spada) {
+                        spada++;
+                    }
+                    else if (closestItem instanceof Coppa) {
+                        coppa++;
+                    }
+                    else if (closestItem instanceof Anello) {
+                        anello++;
+                    }
                     testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!");
                     layeredPane.remove(itemLista.indexOf(closestItem));
+                    itemLista.remove(closestItem);
                 }
-                else{
+                else {
                     testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " non può essere aggiunto allo zaino perché supera il peso massimo");
                     getText();
                 }
@@ -238,7 +255,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         }
         else if (key == KeyEvent.VK_I)
         {
-            InventarioGUI invGUI = new InventarioGUI();
+            InventarioGUI invGUI = new InventarioGUI(mela, stivali, spada, coppa, anello);
             invGUI.setVisible(true);
         }
         else if (key == KeyEvent.VK_ESCAPE)
