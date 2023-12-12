@@ -28,7 +28,7 @@ public class InventarioGUI  extends JFrame implements KeyListener {
         itemLabel2.setForeground(Color.WHITE); // Colore del testo
         itemLabel2.setBounds(225, -20, getWidth(), getHeight());
 
-        ImageIcon backgroundIcon = new ImageIcon(getClass().getResource("backgroundInventory.png"));
+        ImageIcon backgroundIcon = new ImageIcon(getClass().getResource("/images/backgroundInventory.png"));
         Image backgroundImage = backgroundIcon.getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
         JLabel backgroundLabel = new JLabel(new ImageIcon(backgroundImage));
         backgroundLabel.setSize(getSize());
@@ -37,7 +37,7 @@ public class InventarioGUI  extends JFrame implements KeyListener {
         layeredPane.setPreferredSize(getSize());
         layeredPane.add(backgroundLabel, JLayeredPane.DEFAULT_LAYER);
 
-        ImageIcon IconMela = new ImageIcon(getClass().getResource("mela.png"));
+        ImageIcon IconMela = new ImageIcon(getClass().getResource("/images/mela.png"));
         IconMela = new ImageIcon(IconMela.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
         JLabel LabelMela = new JLabel(IconMela);
         int X = 50;
@@ -47,7 +47,7 @@ public class InventarioGUI  extends JFrame implements KeyListener {
         PanelMela.setOpaque(false);
         PanelMela.add(LabelMela);
 
-        ImageIcon IconStivali = new ImageIcon(getClass().getResource("stivali.png"));
+        ImageIcon IconStivali = new ImageIcon(getClass().getResource("/images/stivali.png"));
         IconStivali = new ImageIcon(IconStivali.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
         JLabel LabelStivali = new JLabel(IconStivali);
         int stivaliY = 175;
@@ -56,7 +56,7 @@ public class InventarioGUI  extends JFrame implements KeyListener {
         PanelStivali.setOpaque(false);
         PanelStivali.add(LabelStivali);
 
-        ImageIcon IconSpada = new ImageIcon(getClass().getResource("spada.png"));
+        ImageIcon IconSpada = new ImageIcon(getClass().getResource("/images/spada.png"));
         IconSpada = new ImageIcon(IconSpada.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
         JLabel LabelSpada = new JLabel(IconSpada);
         int spadaY = 285;
@@ -65,7 +65,7 @@ public class InventarioGUI  extends JFrame implements KeyListener {
         PanelSpada.setOpaque(false);
         PanelSpada.add(LabelSpada);
 
-        ImageIcon IconCoppa = new ImageIcon(getClass().getResource("coppa.png"));
+        ImageIcon IconCoppa = new ImageIcon(getClass().getResource("/images/coppa.png"));
         IconCoppa = new ImageIcon(IconCoppa.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
         JLabel LabelCoppa = new JLabel(IconCoppa);
         int coppaX = 162;
@@ -75,7 +75,7 @@ public class InventarioGUI  extends JFrame implements KeyListener {
         PanelCoppa.setOpaque(false);
         PanelCoppa.add(LabelCoppa);
 
-        ImageIcon IconAnello = new ImageIcon(getClass().getResource("anello.png"));
+        ImageIcon IconAnello = new ImageIcon(getClass().getResource("/images/anello.png"));
         IconAnello = new ImageIcon(IconAnello.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
         JLabel LabelAnello = new JLabel(IconAnello);
         int anelloX = 162;
