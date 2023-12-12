@@ -139,7 +139,7 @@ public class Player {
     // Metodo per trovare l'oggetto per terra piu' vicino al player
     public Item findClosestItem(List<Item> items) {
         closestItem = null;
-        double pickupRadius = 100.0; // Definisci il raggio di azione del player
+        double pickupRadius = 150.0; // Definisci il raggio di azione del player
         double distance = 0;
     
         for (Item item : items) {
