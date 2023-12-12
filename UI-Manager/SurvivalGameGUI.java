@@ -233,17 +233,21 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
                     else if (closestItem instanceof Stivali) {
                         stivali++;
                         player.setStepRimanenti((player.getStepRimanenti()+10));
+                        testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!<br>Hai guadagnato 10 passi!");
                     }
                     else if (closestItem instanceof Spada) {
                         spada++;
+                        testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!");
                     }
                     else if (closestItem instanceof Coppa) {
                         coppa++;
+                        testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!");
                     }
                     else if (closestItem instanceof Anello) {
                         anello++;
+                        testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!");
                     }
-                    testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!");
+                    
                     if (itemLista.indexOf(closestItem) != -1) { // Controllo per evitare che elimini il player o lo sfondo
                         player.removeItem(itemPanel, layeredPane, closestItem.getItemX(), closestItem.getItemY());
                     }
@@ -262,7 +266,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         }
         else if (key == KeyEvent.VK_I)
         {
-            InventarioGUI invGUI = new InventarioGUI(mela, stivali, spada, coppa, anello);
+            InventarioGUI invGUI = new InventarioGUI(mela, stivali, spada, coppa, anello, player.getPesoAttuale());
             invGUI.setVisible(true);
         }
         else if (key == KeyEvent.VK_ESCAPE)

@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 public class InventarioGUI  extends JFrame implements KeyListener {
     private JLayeredPane layeredPane;
 
-    public InventarioGUI(int mele, int stivali, int spade, int coppe, int anelli) {
+    public InventarioGUI(int mele, int stivali, int spade, int coppe, int anelli, int peso) {
         setTitle("Inventario");
         setSize(500,400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -23,7 +23,7 @@ public class InventarioGUI  extends JFrame implements KeyListener {
         itemLabel1.setForeground(Color.WHITE); // Colore del testo
         itemLabel1.setBounds(115, 35, getWidth(), getHeight());
 
-        JLabel itemLabel2 = new JLabel("<html>" + coppe + "<br><br><br><br>" + anelli + "</html>");
+        JLabel itemLabel2 = new JLabel("<html><br><br><br><br>" + coppe + "<br><br><br><br>" + anelli + "<br><br><br><br>" + peso + "</html>");
         itemLabel2.setFont(new Font("Arial", Font.BOLD, 24));
         itemLabel2.setForeground(Color.WHITE); // Colore del testo
         itemLabel2.setBounds(225, -20, getWidth(), getHeight());
@@ -85,11 +85,22 @@ public class InventarioGUI  extends JFrame implements KeyListener {
         PanelAnello.setOpaque(false);
         PanelAnello.add(LabelAnello);
 
+        ImageIcon IconPeso = new ImageIcon(getClass().getResource("/images/peso.png"));
+        IconPeso = new ImageIcon(IconPeso.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
+        JLabel LabelPeso = new JLabel(IconPeso);
+        int pesoX = 162;
+        int pesoY = 285;
+        JPanel PanelPeso = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        PanelPeso.setSize(IconPeso.getIconWidth(), IconPeso.getIconHeight());
+        PanelPeso.setOpaque(false);
+        PanelPeso.add(LabelPeso);
+
         PanelMela.setBounds(X, melaY, 64,64);
         PanelStivali.setBounds(X, stivaliY, 64,64);
         PanelSpada.setBounds(X, spadaY, 64,64);
         PanelCoppa.setBounds(coppaX, coppaY, 64,64);
         PanelAnello.setBounds(anelloX, anelloY, 64,64);
+        PanelPeso.setBounds(pesoX, pesoY, 64,64);
         layeredPane.add(itemLabel1, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(itemLabel2, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(PanelMela, JLayeredPane.PALETTE_LAYER);
@@ -97,6 +108,7 @@ public class InventarioGUI  extends JFrame implements KeyListener {
         layeredPane.add(PanelSpada, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(PanelCoppa, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(PanelAnello, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(PanelPeso, JLayeredPane.PALETTE_LAYER);
         add(layeredPane);
     }
 
