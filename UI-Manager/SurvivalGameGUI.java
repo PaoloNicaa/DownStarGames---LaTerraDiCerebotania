@@ -58,12 +58,13 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         // --------- Creazione giocatore ---------
         playerIcon = new ImageIcon(getClass().getResource("/images/playerIdle.gif"));
         playerLabel = new JLabel(playerIcon);
-        playerX = (getWidth() - playerIcon.getIconWidth()) / 2;
-        playerY = (getHeight() - playerIcon.getIconHeight()) / 2;
+        playerX = (int) (getWidth() / 2 - playerIcon.getIconWidth() / 2);
+        playerY = (int) (getHeight() / 2 - playerIcon.getIconHeight() / 2);
         playerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         playerPanel.setSize(playerIcon.getIconWidth(), playerIcon.getIconHeight());
         playerPanel.setOpaque(false); // Trasparenza per vedere lo sfondo
         playerPanel.add(playerLabel);
+        playerPanel.setBounds(playerX, playerY, playerIcon.getIconWidth(), playerIcon.getIconHeight());
 
         // Dichiarazione componenti per spawn edgli oggetti
         Random random = new Random();
@@ -134,7 +135,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         testoLabel.setVerticalAlignment(JLabel.TOP);
         testoLabel.setBounds(0, 20, getWidth(), getHeight()); // Imposta dimensioni e posizione al centro
 
-        playerPanel.setBounds(playerX, playerY, playerIcon.getIconWidth(), playerIcon.getIconHeight());
+        // Aggiunta componenti al layeredPane
         layeredPane.add(playerPanel, JLayeredPane.MODAL_LAYER);
         layeredPane.add(testoLabel, JLayeredPane.MODAL_LAYER);
         add(layeredPane);
