@@ -18,8 +18,15 @@ public class Player {
     protected int pesoAttuale = 0;
     protected int valoreOgg = 0;
     protected List<Item> backpack = new ArrayList<>();
-    private int x;
-    private int y;
+    protected int x;
+    protected int y;
+    protected int i = 0;
+    protected Item closestItem;
+
+    public Player(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
     
     public void setX(int x) {
         this.x = x;
@@ -53,6 +60,14 @@ public class Player {
         itemPanel[i].add(itemLabel[i]);
         itemPanel[i].setBounds(obj.rndX(), obj.rndY(), 64, 64);
         layeredPane.add(itemPanel[i], JLayeredPane.PALETTE_LAYER);
+    }
+
+    public void removeItem(JPanel[] itemPanel, JLayeredPane layeredPane, int x, int y) {
+        for (int i = 0; i < 15; i++) {
+            if (itemPanel[i].getX() == x && itemPanel[i].getY() == y) {
+                layeredPane.remove(itemPanel[i]);
+            }
+        }
     }
 
     public boolean collectItem(Item item) { // Boolean cosi nel main controllo se il peso soddisfa i requisiti
@@ -121,26 +136,25 @@ public class Player {
         
         return distance;
     }
-    // Metodo per trovare l'item più vicino al giocatore
-    public Item findClosestItem(List<Item> itemLista, int maxDistance ) {
-        int minDistance = maxDistance;
-        Item closestItem = null;
+    // Metodo per trovare l'oggetto per terra piu' vicino al player
+    public Item findClosestItem(List<Item> items) {
+        closestItem = null;
+        double pickupRadius = 100.0; // Definisci il raggio di azione del player
+        double distance = 0;
     
-        for (Item currentItem : itemLista)
-        { 
-            int distance = (int) calculateDistance(getX(), getY(), currentItem.getItemX(), currentItem.getItemY());
-            System.out.println("x e y di CurrentItem: " + currentItem.getItemX() + " " + currentItem.getItemY()); // Controllo per la console
-            if (distance < minDistance)
-            {
-                minDistance = distance;
-                closestItem = currentItem;
+        for (Item item : items) {
+            distance = calculateDistance(x, y, item.getItemX(), item.getItemY());
+            i++;
+            if (distance < pickupRadius) {
+                closestItem = item;
+                break;
             }
-
-            if(minDistance > maxDistance)
-            {
-                return null;
+            else {
+                i = 0;
             }
         }
+        i = 0;
         return closestItem;
     }
 }
+    

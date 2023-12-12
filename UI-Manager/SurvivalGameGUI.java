@@ -21,14 +21,15 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
     private JLabel playerLabel;
     private JLabel testoLabel;
     private ImageIcon playerIcon;
+    private JPanel[] itemPanel = new JPanel[15];
     private int playerX;
     private int playerY;
     private List<Item> itemLista;
     private int mela,stivali,spada,coppa,anello;
-    Player player = new Player();
+    Player player;
 
     public String getText() {
-        return "<html><div style='text-align: center;'>- W A S D per muoversi<br>- ESC per uscire<br>- E per raccogliere oggetti<br>- I per aprire inventario<br><br>Mosse Rimanenti: " + player.getStepRimanenti() + "</div></html>";
+        return "<html><div style='text-align: center;'>W A S D per muoversi | ESC per uscire | E per raccogliere oggetti | I per aprire inventario<br><br>Mosse Rimanenti: " + player.getStepRimanenti() + "</div></html>";
     }
 
     public void aggText() {
@@ -58,19 +59,20 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         // --------- Creazione giocatore ---------
         playerIcon = new ImageIcon(getClass().getResource("/images/playerIdle.gif"));
         playerLabel = new JLabel(playerIcon);
-        playerX = (int) (getWidth() / 2 - playerIcon.getIconWidth() / 2);
-        playerY = (int) (getHeight() / 2 - playerIcon.getIconHeight() / 2);
+        playerX = 920; // Coordinate per farlo spawnare al centro
+        playerY = 300;
         playerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         playerPanel.setSize(playerIcon.getIconWidth(), playerIcon.getIconHeight());
         playerPanel.setOpaque(false); // Trasparenza per vedere lo sfondo
         playerPanel.add(playerLabel);
         playerPanel.setBounds(playerX, playerY, playerIcon.getIconWidth(), playerIcon.getIconHeight());
+        player = new Player(playerX, playerY);
 
         // Dichiarazione componenti per spawn edgli oggetti
         Random random = new Random();
         ImageIcon[] itemIcon = new ImageIcon[15];
         JLabel[] itemLabel = new JLabel[15];
-        JPanel[] itemPanel = new JPanel[15];
+        
         itemLista = new ArrayList<>();
         // Ciclo for per spawn random degli oggetti
         for (int i = 0; i < 15; i++) {
@@ -170,7 +172,8 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
     }
 
     public void actionPerformed(ActionEvent e) {
-        playerX = Math.max(0, Math.min(getWidth() - playerIcon.getIconWidth(), playerX)); // Bordi che funzionano in parte per via delle coordinate buggate
+        playerX = Math.max(0, Math.min(getWidth() - playerIcon.getIconWidth(), playerX)); // Bordi per player
+        playerY = Math.max(0, Math.min(getHeight() - playerIcon.getIconHeight(), playerY)); // Per bordo inferiore
         playerPanel.setBounds(playerX, playerY, playerPanel.getWidth(), playerPanel.getHeight());
         revalidate();
         repaint();
@@ -220,7 +223,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         }
         else if (key == KeyEvent.VK_E)
         {
-            Item closestItem = player.findClosestItem(itemLista, 400); // Distanza molto aumentata per via di bug coordinate
+            Item closestItem = player.findClosestItem(itemLista); // Distanza molto aumentata per via di bug coordinate
             System.out.println("Closest Item: " + closestItem + ", x e y del player: " + player.getX() + " " + player.getY() + "\n"); // Controllo in console cosa ritorna
             if (closestItem != null) {  // Controlla se ci sono oggetti vicini
                 if (player.collectItem(closestItem) == true) {  // Controlla se ci sta nello zaino                    
@@ -242,7 +245,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
                     }
                     testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!");
                     if (itemLista.indexOf(closestItem) != -1) { // Controllo per evitare che elimini il player o lo sfondo
-                        layeredPane.remove(itemLista.indexOf(closestItem));
+                        player.removeItem(itemPanel, layeredPane, closestItem.getItemX(), closestItem.getItemY());
                     }
                     itemLista.remove(closestItem);
                 }
