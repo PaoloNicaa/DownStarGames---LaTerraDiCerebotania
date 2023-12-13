@@ -11,7 +11,7 @@ public class PopUp {
     public PopUp() {
         String nomeFile = "ad.mp4";
         String directoryCorrente = System.getProperty("user.dir"); // Path della directory di lavoro corrente
-        directoryCorrente += "\\utils\\"; // Aggiunta sottocartella utils
+        directoryCorrente += "\\UIManager\\utils\\"; // Aggiunta sottocartella utils
         File file = new File(directoryCorrente, nomeFile);
         String percorsoAssoluto = file.getAbsolutePath(); // Trasformo in stringa il totade del path
         this.videoPath = percorsoAssoluto;

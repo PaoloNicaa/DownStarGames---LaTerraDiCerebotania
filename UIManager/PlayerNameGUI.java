@@ -6,6 +6,7 @@ import java.awt.event.*;
 public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener {
     private JLayeredPane layeredPane;
     private String playerName = null;
+    private boolean ctrlName = false;
 
     public PlayerNameGUI() {
         setTitle("Inserisci nome");
@@ -18,6 +19,7 @@ public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener
         setVisible(true);
         addKeyListener(this);
         setFocusable(true);
+        
 
         ImageIcon backgroundIcon = new ImageIcon(getClass().getResource("/UIManager/images/playerNameGUI.png"));
         Image backgroundImage = backgroundIcon.getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
@@ -26,20 +28,52 @@ public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener
 
         layeredPane = new JLayeredPane();
 
-        JLabel playerNameLabel = new JLabel("<html><div><br>Tanto tempo fa, ci fu un cavaliere di nome<br>Egli aveva la missione di esplorare la terra di Sciambox per raccogliere tutti gli oggetti di estremo valore presenti e riportarli al re, ma le sue gambe avevano un problema: dopo 100 passi smettevano di funzionare per il resto della giornata. Raccogli tutti gli item presenti per vincere.</div></html>");
+        ImageIcon IconBanner = new ImageIcon(getClass().getResource("/UIManager/images/banner.png"));
+        IconBanner = new ImageIcon(IconBanner.getImage().getScaledInstance(250, 64, Image.SCALE_SMOOTH));
+        JLabel LabelBanner = new JLabel(IconBanner);
+        int bannerX = 135;
+        int bannerY = 110;
+        JPanel PanelBanner = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        PanelBanner.setSize(IconBanner.getIconWidth(), IconBanner.getIconHeight());
+        PanelBanner.setOpaque(false);
+        PanelBanner.add(LabelBanner);
+        PanelBanner.setBounds(bannerX, bannerY, 250,64);
+
+        JLabel text = new JLabel("<html>SURVIVAL GAME</html>");
+        text.setFont(new Font("Arial", Font.BOLD, 15));
+        text.setForeground(new Color(0,0,0,255));
+        text.setBounds(200, 115, 130, 54);
+
+
+        JLabel playerNameLabel = new JLabel("<html><p align='justify'><br>Tanto tempo fa, ci fu un cavaliere di nome<br>Egli aveva la missione di esplorare la terra di Sciambox per raccogliere tutti gli oggetti di estremo valore presenti e riportarli al re, ma le sue gambe avevano un problema: dopo 100 passi smettevano di funzionare per il resto della giornata. Raccogli tutti gli item presenti per vincere.</p></html>");
         playerNameLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         playerNameLabel.setForeground(new Color(0,0,0,255));
-        playerNameLabel.setBounds(100, 0, 300, 500);
-        layeredPane.add(playerNameLabel, JLayeredPane.PALETTE_LAYER);
+        playerNameLabel.setBounds(110, 60, 300, 500);
+        
 
         JTextField playerNameField = new JTextField();
-        playerNameField.setBounds(175, 142, 200, 23);
-        playerNameField.setFont(new Font("Arial", Font.PLAIN, 20));
+        playerNameField.setBounds(185, 202, 150, 23);
+        playerNameField.setFont(new Font("Arial", Font.ITALIC, 20));
         playerNameLabel.setForeground(new Color(0,0,0,255));
         playerNameField.setBorder(null);
         playerNameField.setBackground(new Color(231,213,179,255));
-        layeredPane.add(playerNameField, JLayeredPane.PALETTE_LAYER);
+        playerNameField.setText("...");
         playerNameField.requestFocusInWindow();
+        playerNameField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                playerNameField.setText("");
+                ctrlName = true;
+            }
+
+            public void mouseEntered(MouseEvent e) {
+                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            }
+
+            public void mouseExited(MouseEvent e) {
+                setCursor(Cursor.getDefaultCursor());
+            }
+        });
 
         ImageIcon IconCross = new ImageIcon(getClass().getResource("/UIManager/images/X.png"));
         IconCross = new ImageIcon(IconCross.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
@@ -67,19 +101,18 @@ public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener
         });
 
         ImageIcon IconButton = new ImageIcon(getClass().getResource("/UIManager/images/buttonStart.png"));
-        IconButton = new ImageIcon(IconButton.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH));
+        IconButton = new ImageIcon(IconButton.getImage().getScaledInstance(120, 60, Image.SCALE_SMOOTH));
         JLabel LabelButton = new JLabel(IconButton);
-        int buttonX = 160;
-        int buttonY = 450;
+        int buttonX = 200;
+        int buttonY = 500;
         JPanel PanelButton = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         PanelButton.setSize(IconButton.getIconWidth(), IconButton.getIconHeight());
         PanelButton.setOpaque(false);
         PanelButton.add(LabelButton);
-        PanelButton.setBounds(buttonX, buttonY, 200,200);
+        PanelButton.setBounds(buttonX, buttonY, 120,60);
         PanelButton.addMouseListener(new MouseAdapter() {
-            
             public void mouseClicked(MouseEvent e) {
-                if (!playerNameField.getText().isEmpty()) {
+                if (!playerNameField.getText().isEmpty() && ctrlName) {
                     playerName = playerNameField.getText();
                     SurvivalGameGUI game = new SurvivalGameGUI(playerName);
                     game.setVisible(true);
@@ -88,7 +121,7 @@ public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener
                     game.setIconImage(image);
                 }
                 else {
-                    JOptionPane.showMessageDialog(null, "Inserisci un nome");
+                    JOptionPane.showMessageDialog(null, "Inserisci un nome giocatore valido", "Attenzione!", JOptionPane.ERROR_MESSAGE);
                 }
             }
 
@@ -103,6 +136,10 @@ public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener
 
         
         layeredPane.setPreferredSize(getSize());
+        layeredPane.add(PanelBanner, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(text, JLayeredPane.MODAL_LAYER);
+        layeredPane.add(playerNameLabel, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(playerNameField, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(PanelCross, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(PanelButton, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(backgroundLabel, JLayeredPane.DEFAULT_LAYER);
