@@ -3,7 +3,7 @@
 --- DA AGGIUNGERE ---
 1. Inerire scritta "Premere 'm' in per disattivare la musica" in nel pannello iniziale (NON DOPO)
 2. Nome sopra al personaggio
-3. Schermata di vincita/perdita
+3. Schermata di vincita/perdita (gia pronta devo solo pushare domani ;))
 
 --- CONSIGLI ---
 Per il nome sopra al personaggio copiare e incollare la logica di movimento del gioco e aggiungerlo sopra al personaggio
