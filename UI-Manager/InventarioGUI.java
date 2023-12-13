@@ -10,9 +10,9 @@ public class InventarioGUI  extends JFrame implements KeyListener {
         setTitle("Inventario");
         setSize(500,400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setUndecorated(true);
-        setBackground(new Color(0,0,0,0));
-        setLocationRelativeTo(null);
+        setUndecorated(true); // Per togliere la barra sopra bianca
+        setBackground(new Color(0,0,0,0)); // Sfondo gui trasparente
+        setLocationRelativeTo(null); // Per farlo apparire al centro
         setResizable(false);
         setVisible(true);
         addKeyListener(this);
