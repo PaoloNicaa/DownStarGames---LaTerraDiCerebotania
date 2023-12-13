@@ -76,8 +76,8 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         
         itemLista = new ArrayList<>();
         // Ciclo for per spawn random degli oggetti
-        for (int i = 0; i < 15; i++) {
-            int rnd = random.nextInt(5);
+        for (int i = 0; i < 7; i++) {
+            int rnd = random.nextInt(7);
             if(rnd == 0)
             {
                 Mela mela = new Mela();
@@ -88,7 +88,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
                 
                 System.out.println("mela: " + mela.getItemX() + " " + mela.getItemY()); // Controllo in console cosa ritorna
             }
-            else if(rnd == 1)
+            else if(rnd >= 1 && rnd <= 3) // 30% di probabilita' di trovare gli stivali
             {
                 Stivali stivali = new Stivali();
                 stivali.spawnItem();
@@ -98,7 +98,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
 
                 System.out.println("stivali: " + stivali.getItemX() + " " + stivali.getItemY()); // Controllo in console cosa ritorna
             }
-            else if(rnd == 2)
+            else if(rnd == 4)
             {
                 Spada spada = new Spada();
                 spada.spawnItem();
@@ -108,7 +108,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
 
                 System.out.println("spada: " + spada.getItemX() + " " + spada.getItemY()); // Controllo in console cosa ritorna
             }
-            else if(rnd == 3)
+            else if(rnd == 5)
             {
                 Coppa coppa = new Coppa();
                 coppa.spawnItem();
@@ -118,7 +118,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
 
                 System.out.println("coppa: " + coppa.getItemX() + " " + coppa.getItemY()); // Controllo in console cosa ritorna
             }
-            else if(rnd == 4)
+            else if(rnd == 6)
             {
                 Anello anello = new Anello();
                 anello.spawnItem();
@@ -226,15 +226,15 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         {
             Item closestItem = player.findClosestItem(itemLista); // Distanza molto aumentata per via di bug coordinate
             System.out.println("Closest Item: " + closestItem + ", x e y del player: " + player.getX() + " " + player.getY() + "\n"); // Controllo in console cosa ritorna
-            if (closestItem != null) {  // Controlla se ci sono oggetti vicini
-                if (player.collectItem(closestItem) == true) {  // Controlla se ci sta nello zaino                    
+            
+            if (closestItem != null) {  // Controlla se ci sono oggetti vicini        
                     if (closestItem instanceof Mela) {
                         mela++;
                     }
                     else if (closestItem instanceof Stivali) {
                         stivali++;
-                        player.setStepRimanenti((player.getStepRimanenti()+10));
-                        testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!<br>Hai guadagnato 10 passi!");
+                        player.setStepRimanenti((player.getStepRimanenti()+30));
+                        testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!<br>Hai guadagnato 20 passi!");
                     }
                     else if (closestItem instanceof Spada) {
                         spada++;
@@ -253,11 +253,6 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
                         player.removeItem(itemPanel, layeredPane, closestItem.getItemX(), closestItem.getItemY());
                     }
                     itemLista.remove(closestItem);
-                }
-                else {
-                    testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " non può essere aggiunto allo zaino perché supera il peso massimo");
-                    getText();
-                }
                 
             }
             else { 

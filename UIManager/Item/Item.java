@@ -49,8 +49,8 @@ public abstract class Item {
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         Random random = new Random();
         y = random.nextInt(((int)size.getHeight()));
-        if (y > (size.getHeight() - 64)) { // Controllo per evitare che gli item si generino al di fuori della mappa
-            y -= 64;
+        if (y > (size.getHeight() - 80)) { // Controllo per evitare che gli item si generino al di fuori della mappa e io riesca comunque a raccoglierli
+            y -= 80;
         }
         return y;
     }
