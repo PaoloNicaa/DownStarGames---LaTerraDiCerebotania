@@ -1,3 +1,5 @@
+package UIManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -5,14 +7,13 @@ import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 
-import utils.Player;
-import utils.PopUp;
-import Item.Mela;
-import Item.Stivali;
-import Item.Spada;
-import Item.Coppa;
-import Item.Item;
-import Item.Anello;
+import UIManager.utils.Player;
+import UIManager.Item.Mela;
+import UIManager.Item.Stivali;
+import UIManager.Item.Spada;
+import UIManager.Item.Coppa;
+import UIManager.Item.Item;
+import UIManager.Item.Anello;
 
 public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListener {
     private JLayeredPane layeredPane;
@@ -46,7 +47,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // --------- Caricamento immagine sfondo ---------
-        ImageIcon backgroundIcon = new ImageIcon(getClass().getResource("/images/background.png"));
+        ImageIcon backgroundIcon = new ImageIcon(getClass().getResource("/UIManager/images/background.png"));
         Image backgroundImage = backgroundIcon.getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
         backgroundLabel = new JLabel(new ImageIcon(backgroundImage));
         backgroundLabel.setSize(getSize());
@@ -57,7 +58,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         layeredPane.add(backgroundLabel, JLayeredPane.DEFAULT_LAYER);
 
         // --------- Creazione giocatore ---------
-        playerIcon = new ImageIcon(getClass().getResource("/images/playerIdle.gif"));
+        playerIcon = new ImageIcon(getClass().getResource("/UIManager/images/playerIdle.gif"));
         playerLabel = new JLabel(playerIcon);
         playerX = 920; // Coordinate per farlo spawnare al centro
         playerY = 300;
@@ -81,7 +82,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             {
                 Mela mela = new Mela();
                 mela.spawnItem();
-                itemIcon[i] = new ImageIcon(getClass().getResource("/images/mela.png"));
+                itemIcon[i] = new ImageIcon(getClass().getResource("/UIManager/images/mela.png"));
                 player.spawnOgg(itemIcon, itemLabel, itemPanel, layeredPane, mela, i);
                 itemLista.add(mela);
                 
@@ -91,7 +92,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             {
                 Stivali stivali = new Stivali();
                 stivali.spawnItem();
-                itemIcon[i] = new ImageIcon(getClass().getResource("/images/stivali.png"));
+                itemIcon[i] = new ImageIcon(getClass().getResource("/UIManager/images/stivali.png"));
                 player.spawnOgg(itemIcon, itemLabel, itemPanel, layeredPane, stivali, i);
                 itemLista.add(stivali);
 
@@ -101,7 +102,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             {
                 Spada spada = new Spada();
                 spada.spawnItem();
-                itemIcon[i] = new ImageIcon(getClass().getResource("/images/spada.png"));
+                itemIcon[i] = new ImageIcon(getClass().getResource("/UIManager/images/spada.png"));
                 player.spawnOgg(itemIcon, itemLabel, itemPanel, layeredPane, spada, i);
                 itemLista.add(spada);
 
@@ -111,7 +112,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             {
                 Coppa coppa = new Coppa();
                 coppa.spawnItem();
-                itemIcon[i] = new ImageIcon(getClass().getResource("/images/coppa.png"));
+                itemIcon[i] = new ImageIcon(getClass().getResource("/UIManager/images/coppa.png"));
                 player.spawnOgg(itemIcon, itemLabel, itemPanel, layeredPane, coppa, i);
                 itemLista.add(coppa);
 
@@ -121,7 +122,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             {
                 Anello anello = new Anello();
                 anello.spawnItem();
-                itemIcon[i] = new ImageIcon(getClass().getResource("/images/anello.png"));
+                itemIcon[i] = new ImageIcon(getClass().getResource("/UIManager/images/anello.png"));
                 player.spawnOgg(itemIcon, itemLabel, itemPanel, layeredPane, anello, i);
                 itemLista.add(anello);
 
@@ -152,7 +153,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             public void keyReleased(KeyEvent e) {
                 int key = e.getKeyCode();
                 if ((key == KeyEvent.VK_W) || (key == KeyEvent.VK_A) || (key == KeyEvent.VK_S) || (key == KeyEvent.VK_D)) {
-                    playerIcon = new ImageIcon(getClass().getResource("/images/playerIdle.gif"));
+                    playerIcon = new ImageIcon(getClass().getResource("/UIManager/images/playerIdle.gif"));
                     playerLabel.setIcon(playerIcon);
                 }
             }
@@ -187,7 +188,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
 
         if (key == KeyEvent.VK_W)
         {
-            playerIcon = new ImageIcon(getClass().getResource("/images/playerRun.gif"));
+            playerIcon = new ImageIcon(getClass().getResource("/UIManager/images/playerRun.gif"));
             GruppoMove();
             aggText();
             playerY -= 20;
@@ -196,7 +197,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         }
         else if (key == KeyEvent.VK_A)
         {
-            playerIcon = new ImageIcon(getClass().getResource("/images/playerRunSx.gif"));
+            playerIcon = new ImageIcon(getClass().getResource("/UIManager/images/playerRunSx.gif"));
             GruppoMove();
             aggText();
             playerX -= 20;
@@ -205,7 +206,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         }
         else if (key == KeyEvent.VK_S)
         {
-            playerIcon = new ImageIcon(getClass().getResource("/images/playerRun.gif"));
+            playerIcon = new ImageIcon(getClass().getResource("/UIManager/images/playerRun.gif"));
             GruppoMove();
             aggText();
             playerY += 20;
@@ -214,7 +215,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         }
         else if (key == KeyEvent.VK_D)
         {
-            playerIcon = new ImageIcon(getClass().getResource("/images/playerRun.gif"));
+            playerIcon = new ImageIcon(getClass().getResource("/UIManager/images/playerRun.gif"));
             GruppoMove();
             aggText();
             playerX += 20;
@@ -276,21 +277,5 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
     }
 
     public void keyReleased(KeyEvent e) {
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> { // InvokeLater serve per gli aggiornamenti alla gui costanti
-            SurvivalGameGUI game = new SurvivalGameGUI();
-            ImageIcon iconaFrame = new ImageIcon(SurvivalGameGUI.class.getResource("/images/icon.png"));
-            Image image = iconaFrame.getImage();
-            game.setIconImage(image);
-            game.setVisible(true);
-
-            Random random = new Random();
-            int popup = random.nextInt(5); // 1 possibilita su 5 per far partire la pubblicita di grubhub
-            if (popup == 1) {
-                new PopUp();
-            }
-        });
     }
 }

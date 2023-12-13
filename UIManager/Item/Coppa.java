@@ -1,4 +1,4 @@
-package Item;
+package UIManager.Item;
 
 public class Coppa extends Item {
     public Coppa() {

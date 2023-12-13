@@ -1,4 +1,5 @@
-package Item;
+package UIManager.Item;
+
 import java.awt.*;
 import java.util.Random;
 

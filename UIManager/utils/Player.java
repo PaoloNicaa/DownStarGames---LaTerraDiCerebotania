@@ -1,4 +1,6 @@
-package utils;
+package UIManager.utils;
+import UIManager.Item.Item;
+
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -7,7 +9,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import Item.Item;
 
 //NICA
 

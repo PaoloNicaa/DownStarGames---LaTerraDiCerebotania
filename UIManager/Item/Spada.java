@@ -1,4 +1,4 @@
-package Item;
+package UIManager.Item;
 
 public class Spada extends Item {
     public Spada() {

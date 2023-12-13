@@ -1,4 +1,4 @@
-package Item;
+package UIManager.Item;
 
 public class Stivali extends Item {
     public Stivali() {
