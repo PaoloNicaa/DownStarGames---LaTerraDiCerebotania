@@ -26,7 +26,7 @@ public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener
 
         layeredPane = new JLayeredPane();
 
-        JLabel playerNameLabel = new JLabel("<html><div>Tanto tempo fa, ci fu un cavaliere di nome<br>Egli aveva la missione di dover raccogliere piu' oggetti di valore che poteva per riportarli al re, ma le sue gambe avevano un problema, dopo 50 passi smettevano di funzionare per il resto della giornata per cui doveva pensare a ogni sua mossa con cura.</div></html>");
+        JLabel playerNameLabel = new JLabel("<html><div><br>Tanto tempo fa, ci fu un cavaliere di nome<br>Egli aveva la missione di esplorare la terra di Sciambox per raccogliere tutti gli oggetti di estremo valore presenti e riportarli al re, ma le sue gambe avevano un problema: dopo 100 passi smettevano di funzionare per il resto della giornata. Raccogli tutti gli item presenti per vincere.</div></html>");
         playerNameLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         playerNameLabel.setForeground(new Color(0,0,0,255));
         playerNameLabel.setBounds(100, 0, 300, 500);
@@ -67,15 +67,15 @@ public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener
         });
 
         ImageIcon IconButton = new ImageIcon(getClass().getResource("/UIManager/images/buttonStart.png"));
-        IconButton = new ImageIcon(IconButton.getImage().getScaledInstance(128, 64, Image.SCALE_SMOOTH));
+        IconButton = new ImageIcon(IconButton.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH));
         JLabel LabelButton = new JLabel(IconButton);
-        int buttonX = 200;
-        int buttonY = 500;
+        int buttonX = 160;
+        int buttonY = 450;
         JPanel PanelButton = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         PanelButton.setSize(IconButton.getIconWidth(), IconButton.getIconHeight());
         PanelButton.setOpaque(false);
         PanelButton.add(LabelButton);
-        PanelButton.setBounds(buttonX, buttonY, 128,64);
+        PanelButton.setBounds(buttonX, buttonY, 200,200);
         PanelButton.addMouseListener(new MouseAdapter() {
             
             public void mouseClicked(MouseEvent e) {
