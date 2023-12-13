@@ -14,6 +14,7 @@ import UIManager.Item.Spada;
 import UIManager.Item.Coppa;
 import UIManager.Item.Item;
 import UIManager.Item.Anello;
+import UIManager.audio.Audio;
 
 public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListener {
     private JLayeredPane layeredPane;
@@ -232,23 +233,33 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
                         mela++;
                         player.setStepRimanenti((player.getStepRimanenti()+10));
                         testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!<br>Hai guadagnato 10 passi!");
+
+                        Audio.playSound("/UIManager/audio/up.wav");
                     }
                     else if (closestItem instanceof Stivali) {
                         stivali++;
                         player.setStepRimanenti((player.getStepRimanenti()+30));
                         testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!<br>Hai guadagnato 30 passi!");
+                        
+                        Audio.playSound("/UIManager/audio/up.wav");
                     }
                     else if (closestItem instanceof Spada) {
                         spada++;
                         testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!");
+
+                        Audio.playSound("/UIManager/audio/up.wav");
                     }
                     else if (closestItem instanceof Coppa) {
                         coppa++;
                         testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!");
+
+                        Audio.playSound("/UIManager/audio/up.wav");
                     }
                     else if (closestItem instanceof Anello) {
                         anello++;
                         testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!");
+
+                        Audio.playSound("/UIManager/audio/up.wav");
                     }
                     
                     if (itemLista.indexOf(closestItem) != -1) { // Controllo per evitare che elimini il player o lo sfondo
