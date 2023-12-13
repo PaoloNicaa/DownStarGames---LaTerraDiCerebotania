@@ -4,8 +4,7 @@
 1. Pannello per inserire nome giocatore
 2. Nome sopra al personaggio
 3. Suoni per muoversi
-4. Logica per finire il gioco
-5. Schermata di fine gioco
+5. Schermata di vincita/perdita
 
 --- CONSIGLI ---
 Per il nome sopra al personaggio copiare e incollare la logica di movimento del gioco e aggiungerlo sopra al personaggio
