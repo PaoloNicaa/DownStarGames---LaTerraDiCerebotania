@@ -28,7 +28,6 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
     private List<Item> itemLista;
     private int mela,stivali,spada,coppa,anello;
     Player player;
-    String fontFilePath = "/UIManager/fonts/8bitFont.ttf";
 
     public String getText() {
         return "<html><div style='text-align: center;'>W A S D per muoversi | ESC per uscire | E per raccogliere oggetti | I per aprire inventario<br><br>Mosse Rimanenti: " + player.getStepRimanenti() + "</div></html>";
