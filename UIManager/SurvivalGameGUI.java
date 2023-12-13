@@ -38,7 +38,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         testoLabel.setText(getText());
     }
 
-    public SurvivalGameGUI() {
+    public SurvivalGameGUI(String playerName) {
         setTitle("Survival Game");
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); //Funzione per ottenere risoluzione dello schermo
         setSize((int)size.getWidth(), (int)size.getHeight());
