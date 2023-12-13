@@ -10,8 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-//NICA
-
 public class Player {
     
     protected int stepRimanenti = 100;

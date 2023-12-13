@@ -28,6 +28,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
     private List<Item> itemLista;
     private int mela,stivali,spada,coppa,anello;
     Player player;
+    String fontFilePath = "/UIManager/fonts/8bitFont.ttf";
 
     public String getText() {
         return "<html><div style='text-align: center;'>W A S D per muoversi | ESC per uscire | E per raccogliere oggetti | I per aprire inventario<br><br>Mosse Rimanenti: " + player.getStepRimanenti() + "</div></html>";
@@ -230,11 +231,13 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             if (closestItem != null) {  // Controlla se ci sono oggetti vicini        
                     if (closestItem instanceof Mela) {
                         mela++;
+                        player.setStepRimanenti((player.getStepRimanenti()+10));
+                        testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!<br>Hai guadagnato 10 passi!");
                     }
                     else if (closestItem instanceof Stivali) {
                         stivali++;
                         player.setStepRimanenti((player.getStepRimanenti()+30));
-                        testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!<br>Hai guadagnato 20 passi!");
+                        testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!<br>Hai guadagnato 30 passi!");
                     }
                     else if (closestItem instanceof Spada) {
                         spada++;

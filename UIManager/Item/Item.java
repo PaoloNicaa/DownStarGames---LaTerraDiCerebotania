@@ -3,8 +3,6 @@ package UIManager.Item;
 import java.awt.*;
 import java.util.Random;
 
-//NICA
-
 public abstract class Item {
     private String name;
     private int peso;
