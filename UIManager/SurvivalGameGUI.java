@@ -264,7 +264,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         }
         else if (key == KeyEvent.VK_I)
         {
-            InventarioGUI invGUI = new InventarioGUI(mela, stivali, spada, coppa, anello, player.getPesoAttuale());
+            InventarioGUI invGUI = new InventarioGUI(mela, stivali, spada, coppa, anello);
             invGUI.setVisible(true);
         }
         else if (key == KeyEvent.VK_ESCAPE)

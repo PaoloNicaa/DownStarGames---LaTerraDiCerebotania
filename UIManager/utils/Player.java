@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 public class Player {
     
     protected int stepRimanenti = 100;
-    protected int pesoAttuale = 0;
     protected int valoreOgg = 0;
     protected List<Item> backpack = new ArrayList<>();
     protected int x;
@@ -59,10 +58,6 @@ public class Player {
         return stepRimanenti;
     }
     
-    public int getPesoAttuale() {
-        return pesoAttuale;
-    }
-    
     public int getValoreOgg() {
         return valoreOgg;
     }
@@ -73,10 +68,6 @@ public class Player {
     
     public void setStepRimanenti(int stepRimanenti) {
         this.stepRimanenti = stepRimanenti;
-    }
-    
-    public void setPesoAttuale(int pesoAttuale) {
-        this.pesoAttuale = pesoAttuale;
     }
     
     public void setValoreOgg(int valoreOgg) {
