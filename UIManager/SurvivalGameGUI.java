@@ -80,7 +80,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         itemPanel = new JPanel[numItem];
         itemLista = new ArrayList<Item>();
         // Ciclo for per spawn random degli oggetti
-        for (int i = 0; i < numItem; i++) {
+        for (int i = 0; i < numItem - 1; i++) {
             int rnd = random.nextInt(7);
             if(rnd == 0)
             {
