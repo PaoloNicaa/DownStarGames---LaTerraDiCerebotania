@@ -77,7 +77,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         ImageIcon[] itemIcon = new ImageIcon[numItem];
         JLabel[] itemLabel = new JLabel[numItem];
         itemPanel = new JPanel[numItem];
-        itemLista = new ArrayList<>();
+        itemLista = new ArrayList<Item>();
         // Ciclo for per spawn random degli oggetti
         for (int i = 0; i < numItem - 1; i++) {
             int rnd = random.nextInt(7);
@@ -142,7 +142,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         testoLabel.setBounds(0, 20, getWidth(), getHeight()); // Imposta dimensioni e posizione al centro
 
         nomePlayer = new JLabel(playerName);
-        nomePlayer.setFont(new Font("Arial", Font.BOLD, 15));
+        nomePlayer.setFont(new Font("Arial", Font.BOLD, 20));
         nomePlayer.setForeground(Color.WHITE); // Colore del testo
         nomePlayer.setBounds(playerX+50, playerY-550, getWidth(), getHeight());
 

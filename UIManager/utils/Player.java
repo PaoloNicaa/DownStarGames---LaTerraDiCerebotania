@@ -50,10 +50,6 @@ public class Player {
     public void movimento() {
         stepRimanenti--;
     }
-
-    public int getCollectedValue() {
-        return valoreOgg;
-    }
     
     public int getStepRimanenti() {
         return stepRimanenti;
@@ -72,7 +68,7 @@ public class Player {
     }
     
     public void setValoreOgg(int valoreOgg) {
-        this.valoreOgg = valoreOgg;
+        this.valoreOgg += valoreOgg;
     }
     
     public void setBackpack(List<Item> backpack) {
@@ -96,10 +92,11 @@ public class Player {
         itemPanel[i].add(itemLabel[i]);
         itemPanel[i].setBounds(obj.rndX(), obj.rndY(), 64, 64);
         layeredPane.add(itemPanel[i], JLayeredPane.PALETTE_LAYER);
+        setValoreOgg(obj.getValore());
     }
 
     public void removeItem(JPanel[] itemPanel, JLayeredPane layeredPane, int x, int y) {
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < itemPanel.length-1; i++) {
             if (itemPanel[i].getX() == x && itemPanel[i].getY() == y) {
                 layeredPane.remove(itemPanel[i]);
             }
