@@ -1,9 +1,9 @@
 # DownStarGames---SurvivalGame (La terra di Sciambox)
 
 --- DA AGGIUNGERE ---
-1. Inerire scritta "Premere 'm' in per disattivare la musica" in nel pannello iniziale (NON DOPO)
-2. Nome sopra al personaggio
-3. Schermata di vincita/perdita (gia pronta devo solo pushare domani ;))
+1. Nome sopra al personaggio
+2. Schermata di vincita/perdita (gia pronta devo solo pushare domani ;))
+3. Bug raccolta item per qualche motivo non toglie alcuni item forse problemi con la lista
 
 --- CONSIGLI ---
 Per il nome sopra al personaggio copiare e incollare la logica di movimento del gioco e aggiungerlo sopra al personaggio

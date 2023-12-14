@@ -8,39 +8,12 @@ public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener
     private JLayeredPane layeredPane;
     private String playerName = null;
     private boolean ctrlName = false;
-    private boolean avvio = true;
     private JPanel PanelON;
     private JPanel PanelOFF;
     private JTextField playerNameField;
     private JTextField stepField;
     private JTextField itemField;
     private SurvivalGameGUI game;
-
-    private void startGame() {
-        if (!playerNameField.getText().isEmpty() && ctrlName) {
-                    playerName = playerNameField.getText();
-                    try {
-                        int step = Integer.parseInt(stepField.getText());
-                        int item = Integer.parseInt(itemField.getText());
-                        game = new SurvivalGameGUI(playerName, item, step);
-                    }
-                    catch (NumberFormatException ex) {
-                        // Se l'utente ha inserito una stringa non convertibile in intero
-                        JOptionPane.showMessageDialog(null, "Inserisci solo numeri validi!");
-                        avvio = false;
-                    }
-                    game.setVisible(true);
-                    ImageIcon iconaFrame = new ImageIcon(SurvivalGameGUI.class.getResource("/UIManager/images/icon.png"));
-                    Image image = iconaFrame.getImage();
-                    game.setIconImage(image);
-                    revalidate();
-                    repaint();
-                    dispose();
-                }
-                else {
-                    JOptionPane.showMessageDialog(null, "Inserisci un nome giocatore valido", "Attenzione!", JOptionPane.ERROR_MESSAGE);
-                }
-    }
 
     public PlayerNameGUI() {
         setTitle("Inserisci nome");
@@ -136,14 +109,14 @@ public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener
         text.setBounds(200, 115, 130, 54);
 
 
-        JLabel playerNameLabel = new JLabel("<html><p align='justify'><br>Tanto tempo fa, ci fu un cavaliere di nome<br>Egli aveva la missione di esplorare la terra di Sciambox per raccogliere tutti gli oggetti di estremo valore presenti e riportarli al re, ma le sue gambe avevano un problema: dopo 100 passi smettevano di funzionare per il resto della giornata. Raccogli tutti gli item presenti per vincere.</p></html>");
+        JLabel playerNameLabel = new JLabel("<html><p align='justify'><br>Tanto tempo fa, ci fu un cavaliere di nome:<br><br>Egli aveva la missione di esplorare la terra di Sciambox per raccogliere tutti gli oggetti di estremo valore presenti e riportarli al re, ma le sue gambe avevano un problema: dopo 100 passi smettevano di funzionare per il resto della giornata. Raccogli tutti gli item presenti per vincere.</p></html>");
         playerNameLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         playerNameLabel.setForeground(new Color(0,0,0,255));
         playerNameLabel.setBounds(110, 60, 300, 500);
         
 
         playerNameField = new JTextField();
-        playerNameField.setBounds(185, 202, 150, 23);
+        playerNameField.setBounds(110, 215, 150, 23);
         playerNameField.setFont(new Font("Arial", Font.ITALIC, 20));
         playerNameLabel.setForeground(new Color(0,0,0,255));
         playerNameField.setBorder(null);
@@ -203,7 +176,22 @@ public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener
         PanelButton.setBounds(buttonX, buttonY, 120,60);
         PanelButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                startGame();
+                if (!playerNameField.getText().isEmpty() && ctrlName) {
+                    playerName = playerNameField.getText();
+                    int step = 100;
+                    int item = 10;
+                    game = new SurvivalGameGUI(playerName, item, step);
+                    game.setVisible(true);
+                    ImageIcon iconaFrame = new ImageIcon(SurvivalGameGUI.class.getResource("/UIManager/images/icon.png"));
+                    Image image = iconaFrame.getImage();
+                    game.setIconImage(image);
+                    revalidate();
+                    repaint();
+                    dispose();
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Inserisci un nome giocatore valido", "Attenzione!", JOptionPane.ERROR_MESSAGE);
+                }
             }
 
             public void mouseEntered(MouseEvent e) {
@@ -278,8 +266,28 @@ public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener
         PanelButton2.setBounds(button2X, button2Y, 120,60);
         PanelButton2.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                if (avvio)
-                    startGame();
+                if (!playerNameField.getText().isEmpty() && ctrlName) {
+                    playerName = playerNameField.getText();
+                    try {
+                        int step = Integer.parseInt(stepField.getText());
+                        int item = Integer.parseInt(itemField.getText());
+                        game = new SurvivalGameGUI(playerName, item, step);
+                    }
+                    catch (NumberFormatException ex) {
+                        // Se l'utente ha inserito una stringa non convertibile in intero
+                        JOptionPane.showMessageDialog(null, "Inserisci solo numeri validi!");
+                    }
+                    game.setVisible(true);
+                    ImageIcon iconaFrame = new ImageIcon(SurvivalGameGUI.class.getResource("/UIManager/images/icon.png"));
+                    Image image = iconaFrame.getImage();
+                    game.setIconImage(image);
+                    revalidate();
+                    repaint();
+                    dispose();
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Inserisci un nome giocatore valido", "Attenzione!", JOptionPane.ERROR_MESSAGE);
+                }
             }
 
             public void mouseEntered(MouseEvent e) {

@@ -13,11 +13,9 @@ public class App {
         
             Random random = new Random();
             int popup = random.nextInt(5); 
-
             if(popup == 1) { // 1 possibilita su 5 di far partire il gioco senza pubblicita
                 new PopUp(); // Easter egg
             }
-            else{
                 PlayerNameGUI playerNameGUI = new PlayerNameGUI();
                 playerNameGUI.setVisible(true);
     
@@ -32,7 +30,6 @@ public class App {
                         e.printStackTrace();
                     }
                 }).start();
-            }
-    });
+        });
     }
 }
