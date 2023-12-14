@@ -10,9 +10,4 @@ public class Mela extends Item {
         Item mela = new Mela();
         return mela;
     }
-
-    @Override
-    public int getValore() {
-        return super.getValore();
-    }
 }
