@@ -10,4 +10,9 @@ public class Coppa extends Item {
         Item coppa = new Coppa();
         return coppa;
     }
+
+    @Override
+    public int getValore() {
+        return super.getValore();
+    }
 }

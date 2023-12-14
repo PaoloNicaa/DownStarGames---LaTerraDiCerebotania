@@ -10,4 +10,9 @@ public class Stivali extends Item {
         Item stivali = new Stivali();
         return stivali;
     }
+
+    @Override
+    public int getValore() {
+        return super.getValore();
+    }
 }

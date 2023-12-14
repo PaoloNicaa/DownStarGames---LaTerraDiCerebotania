@@ -53,6 +53,21 @@ public abstract class Item {
         return y;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Item otherItem = (Item) obj;
+        // Confronto degli attributi rilevanti per determinare l'uguaglianza
+        // Modifica questi confronti in base alla struttura specifica della tua classe Item.
+        return this.getItemX() == otherItem.getItemX() &&
+               this.getItemY() == otherItem.getItemY();
+    }
+
     public int getItemX() {
         return x;
     }
