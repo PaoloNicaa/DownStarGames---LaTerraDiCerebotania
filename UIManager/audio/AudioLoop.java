@@ -1,19 +1,17 @@
 package UIManager.audio;
 
 import javax.sound.sampled.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.net.URL;
 
-public class AudioLoop implements KeyListener {
-    private Clip clip;
-    private boolean paused;
+public class AudioLoop {
+    private static Clip clip;
+    private static boolean paused;
 
-    public AudioLoop(String filePath) {
+    public AudioLoop() {
         try {
             // Carica il suono da file
-            URL soundURL = getClass().getResource(filePath);
+            URL soundURL = getClass().getResource("/UIManager/audio/loopSoundInGame.wav");
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundURL);
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
@@ -26,14 +24,7 @@ public class AudioLoop implements KeyListener {
         }
     }
 
-    public void keyPressed(KeyEvent e) {
-        int key = e.getKeyCode();
-        if (key == KeyEvent.VK_M) {
-            togglePause(); // Chiamerà il metodo per mettere in pausa/riprendere la musica
-        }
-    }
-
-    private void togglePause() {
+    public static void togglePause() {
         if (clip != null) {
             if (paused) {
                 // Riprendi la riproduzione dal punto in cui era stata messa in pausa
@@ -50,14 +41,5 @@ public class AudioLoop implements KeyListener {
     // Restituisce lo stato corrente della pausa
     public boolean isPaused() {
         return paused;
-    }
-
-    // Implementazioni non utilizzate
-    @Override
-    public void keyTyped(KeyEvent e) {
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
     }
 }

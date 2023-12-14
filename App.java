@@ -14,10 +14,9 @@ public class App {
             Random random = new Random();
             int popup = random.nextInt(5); 
 
-            if(popup == 1) { // 4 possibilita su 5 di far partire il gioco senza pubblicita
+            if(popup == 1) { // 1 possibilita su 5 di far partire il gioco senza pubblicita
                 new PopUp(); // Easter egg
             }
-
             else{
                 PlayerNameGUI playerNameGUI = new PlayerNameGUI();
                 playerNameGUI.setVisible(true);
@@ -28,8 +27,7 @@ public class App {
     
                 new Thread(() -> { // Thread per gestire l'audio
                     try {
-                        AudioLoop audio = new AudioLoop("/UIManager/audio/loopSoundInGame.wav");
-                        playerNameGUI.addKeyListener(audio);
+                        new AudioLoop();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

@@ -23,7 +23,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
     private JLabel playerLabel;
     private JLabel testoLabel;
     private ImageIcon playerIcon;
-    private JPanel[] itemPanel = new JPanel[15];
+    private JPanel[] itemPanel;
     private int playerX;
     private int playerY;
     private List<Item> itemLista;
@@ -38,7 +38,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         testoLabel.setText(getText());
     }
 
-    public SurvivalGameGUI(String playerName) {
+    public SurvivalGameGUI(String playerName, int numItem, int numStep) {
         setTitle("Survival Game");
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); //Funzione per ottenere risoluzione dello schermo
         setSize((int)size.getWidth(), (int)size.getHeight());
@@ -69,15 +69,16 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         playerPanel.add(playerLabel);
         playerPanel.setBounds(playerX, playerY, playerIcon.getIconWidth(), playerIcon.getIconHeight());
         player = new Player(playerX, playerY);
+        player.setStepRimanenti(numStep);
 
         // Dichiarazione componenti per spawn edgli oggetti
         Random random = new Random();
-        ImageIcon[] itemIcon = new ImageIcon[15];
-        JLabel[] itemLabel = new JLabel[15];
-        
+        ImageIcon[] itemIcon = new ImageIcon[numItem];
+        JLabel[] itemLabel = new JLabel[numItem];
+        itemPanel = new JPanel[numItem];
         itemLista = new ArrayList<>();
         // Ciclo for per spawn random degli oggetti
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < numItem - 1; i++) {
             int rnd = random.nextInt(7);
             if(rnd == 0)
             {

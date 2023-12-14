@@ -2,11 +2,45 @@ package UIManager;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import UIManager.audio.AudioLoop;
 
 public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener {
     private JLayeredPane layeredPane;
     private String playerName = null;
     private boolean ctrlName = false;
+    private boolean avvio = true;
+    private JPanel PanelON;
+    private JPanel PanelOFF;
+    private JTextField playerNameField;
+    private JTextField stepField;
+    private JTextField itemField;
+    private SurvivalGameGUI game;
+
+    private void startGame() {
+        if (!playerNameField.getText().isEmpty() && ctrlName) {
+                    playerName = playerNameField.getText();
+                    try {
+                        int step = Integer.parseInt(stepField.getText());
+                        int item = Integer.parseInt(itemField.getText());
+                        game = new SurvivalGameGUI(playerName, item, step);
+                    }
+                    catch (NumberFormatException ex) {
+                        // Se l'utente ha inserito una stringa non convertibile in intero
+                        JOptionPane.showMessageDialog(null, "Inserisci solo numeri validi!");
+                        avvio = false;
+                    }
+                    game.setVisible(true);
+                    ImageIcon iconaFrame = new ImageIcon(SurvivalGameGUI.class.getResource("/UIManager/images/icon.png"));
+                    Image image = iconaFrame.getImage();
+                    game.setIconImage(image);
+                    revalidate();
+                    repaint();
+                    dispose();
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Inserisci un nome giocatore valido", "Attenzione!", JOptionPane.ERROR_MESSAGE);
+                }
+    }
 
     public PlayerNameGUI() {
         setTitle("Inserisci nome");
@@ -39,6 +73,63 @@ public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener
         PanelBanner.add(LabelBanner);
         PanelBanner.setBounds(bannerX, bannerY, 250,64);
 
+        ImageIcon IconON = new ImageIcon(getClass().getResource("/UIManager/images/ON.png"));
+        IconON = new ImageIcon(IconON.getImage().getScaledInstance(64, 32, Image.SCALE_SMOOTH));
+        JLabel LabelON = new JLabel(IconON);
+        int musicX = 620;
+        int musicY = 110;
+        PanelON = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        PanelON.setSize(IconON.getIconWidth(), IconON.getIconHeight());
+        PanelON.setOpaque(false);
+        PanelON.add(LabelON);
+        PanelON.setBounds(musicX, musicY, 64,32);
+        PanelON.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                PanelON.setVisible(false);
+                PanelOFF.setVisible(true);
+                AudioLoop.togglePause();
+            }
+
+            public void mouseEntered(MouseEvent e) {
+                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            }
+
+            public void mouseExited(MouseEvent e) {
+                setCursor(Cursor.getDefaultCursor());
+            }
+        });
+
+        ImageIcon IconOFF = new ImageIcon(getClass().getResource("/UIManager/images/OFF.png"));
+        IconOFF = new ImageIcon(IconOFF.getImage().getScaledInstance(64, 32, Image.SCALE_SMOOTH));
+        JLabel LabelOFF = new JLabel(IconOFF);
+        PanelOFF = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        PanelOFF.setSize(IconOFF.getIconWidth(), IconOFF.getIconHeight());
+        PanelOFF.setOpaque(false);
+        PanelOFF.add(LabelOFF);
+        PanelOFF.setBounds(musicX, musicY, 64,32);
+        PanelOFF.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                PanelON.setVisible(true);
+                PanelOFF.setVisible(false);
+                AudioLoop.togglePause();
+            }
+
+            public void mouseEntered(MouseEvent e) {
+                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            }
+
+            public void mouseExited(MouseEvent e) {
+                setCursor(Cursor.getDefaultCursor());
+            }
+        });
+
+        JLabel musica = new JLabel("<html>MUSICA:</html>");
+        musica.setFont(new Font("Arial", Font.BOLD, 15));
+        musica.setForeground(new Color(0,0,0,255));
+        musica.setBounds(550, 100, 130, 54);
+
         JLabel text = new JLabel("<html>SURVIVAL GAME</html>");
         text.setFont(new Font("Arial", Font.BOLD, 15));
         text.setForeground(new Color(0,0,0,255));
@@ -51,7 +142,7 @@ public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener
         playerNameLabel.setBounds(110, 60, 300, 500);
         
 
-        JTextField playerNameField = new JTextField();
+        playerNameField = new JTextField();
         playerNameField.setBounds(185, 202, 150, 23);
         playerNameField.setFont(new Font("Arial", Font.ITALIC, 20));
         playerNameLabel.setForeground(new Color(0,0,0,255));
@@ -112,17 +203,7 @@ public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener
         PanelButton.setBounds(buttonX, buttonY, 120,60);
         PanelButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                if (!playerNameField.getText().isEmpty() && ctrlName) {
-                    playerName = playerNameField.getText();
-                    SurvivalGameGUI game = new SurvivalGameGUI(playerName);
-                    game.setVisible(true);
-                    ImageIcon iconaFrame = new ImageIcon(SurvivalGameGUI.class.getResource("/UIManager/images/icon.png"));
-                    Image image = iconaFrame.getImage();
-                    game.setIconImage(image);
-                }
-                else {
-                    JOptionPane.showMessageDialog(null, "Inserisci un nome giocatore valido", "Attenzione!", JOptionPane.ERROR_MESSAGE);
-                }
+                startGame();
             }
 
             public void mouseEntered(MouseEvent e) {
@@ -134,14 +215,96 @@ public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener
             }
         });
 
+        JLabel customGameLabel = new JLabel("<html><p align='justify'>Partita personalizzata, consigliata per chi ha gia' provato il gioco normale.<br>Numero passi:<br><br>Numero item:</p></html>");
+        customGameLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        customGameLabel.setForeground(new Color(0,0,0,255));
+        customGameLabel.setBounds(580, 60, 300, 500);
+
+        stepField = new JTextField();
+        stepField.setBounds(580, 335, 150, 23);
+        stepField.setFont(new Font("Arial", Font.ITALIC, 20));
+        stepField.setForeground(new Color(0,0,0,255));
+        stepField.setBorder(null);
+        stepField.setBackground(new Color(231,213,179,255));
+        stepField.setText("...");
+        stepField.requestFocusInWindow();
+        stepField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                stepField.setText("");
+            }
+
+            public void mouseEntered(MouseEvent e) {
+                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            }
+
+            public void mouseExited(MouseEvent e) {
+                setCursor(Cursor.getDefaultCursor());
+            }
+        });
+
+        itemField = new JTextField();
+        itemField.setBounds(580, 380, 150, 23);
+        itemField.setFont(new Font("Arial", Font.ITALIC, 20));
+        itemField.setForeground(new Color(0,0,0,255));
+        itemField.setBorder(null);
+        itemField.setBackground(new Color(231,213,179,255));
+        itemField.setText("...");
+        itemField.requestFocusInWindow();
+        itemField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                itemField.setText("");
+            }
+
+            public void mouseEntered(MouseEvent e) {
+                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            }
+
+            public void mouseExited(MouseEvent e) {
+                setCursor(Cursor.getDefaultCursor());
+            }
+        });
+
+        ImageIcon IconButton2 = new ImageIcon(getClass().getResource("/UIManager/images/buttonStart.png"));
+        IconButton2 = new ImageIcon(IconButton2.getImage().getScaledInstance(120, 60, Image.SCALE_SMOOTH));
+        JLabel LabelButton2 = new JLabel(IconButton2);
+        int button2X = 680;
+        int button2Y = 500;
+        JPanel PanelButton2 = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        PanelButton2.setSize(IconButton2.getIconWidth(), IconButton2.getIconHeight());
+        PanelButton2.setOpaque(false);
+        PanelButton2.add(LabelButton2);
+        PanelButton2.setBounds(button2X, button2Y, 120,60);
+        PanelButton2.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (avvio)
+                    startGame();
+            }
+
+            public void mouseEntered(MouseEvent e) {
+                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            }
+
+            public void mouseExited(MouseEvent e) {
+                setCursor(Cursor.getDefaultCursor());
+            }
+        });
         
         layeredPane.setPreferredSize(getSize());
+        layeredPane.add(PanelON, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(PanelOFF, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(PanelBanner, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(musica, JLayeredPane.MODAL_LAYER);
         layeredPane.add(text, JLayeredPane.MODAL_LAYER);
         layeredPane.add(playerNameLabel, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(customGameLabel, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(playerNameField, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(stepField, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(itemField, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(PanelCross, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(PanelButton, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(PanelButton2, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(backgroundLabel, JLayeredPane.DEFAULT_LAYER);
         add(layeredPane);
 

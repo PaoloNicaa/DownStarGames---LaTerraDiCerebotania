@@ -18,6 +18,7 @@ public class Player {
     protected int x;
     protected int y;
     protected int i = 0;
+    protected int numItem = 1;
     protected Item closestItem;
 
     //---------------------------------- SETTERS & GETTERS ---------------------------------- //
@@ -79,6 +80,14 @@ public class Player {
     }
 
     // ---------------------------------- METODI PER LA GESTIONE DEGLI ITEM ---------------------------------- //
+    public void setNumItem(int numItem) {
+        this.numItem = numItem;
+    }
+
+    public int getNumItem() {
+        return numItem;
+    }
+
     public void spawnOgg(ImageIcon[] itemIcon, JLabel[] itemLabel, JPanel[] itemPanel, JLayeredPane layeredPane, Item obj, int i) {
         itemIcon[i] = new ImageIcon(itemIcon[i].getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
         itemLabel[i] = new JLabel(itemIcon[i]);
