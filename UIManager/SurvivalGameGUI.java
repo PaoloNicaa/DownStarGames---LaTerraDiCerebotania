@@ -169,8 +169,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         }
         else
         {
-            JOptionPane.showMessageDialog(null, "              Game Over!\n  Valore Oggetti totalizzato: " + player.getValoreOgg(),"____________________________________________", JOptionPane.INFORMATION_MESSAGE);
-            System.exit(0);
+            GameOverGUI gameOverGUI = new GameOverGUI(player);
         }
     }
 
