@@ -25,7 +25,7 @@ public class WinGUI extends JFrame implements KeyListener{
         
         // ------------------Background------------------ //
         ImageIcon backgroundIcon = new ImageIcon(getClass().getResource("/UIManager/images/Win.png"));
-        Image backgroundImage = backgroundIcon.getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
+        Image backgroundImage = backgroundIcon.getImage().getScaledInstance(500, 204, Image.SCALE_SMOOTH);
         
         if(backgroundIcon.getImage() == null) { // Debug
             System.out.println("Errore");

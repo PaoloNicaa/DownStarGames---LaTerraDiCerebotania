@@ -284,6 +284,10 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
                     player.setValoreOgg(valoreTot);
                     player.removeItem(itemPanel, layeredPane, closestItem.getItemX(), closestItem.getItemY());
                     itemLista.remove(closestItem);
+
+                    if(itemLista.isEmpty()){
+                        new WinGUI(player);
+                    }
             }
             else { 
                 testoLabel.setText("<html><div style='text-align: center;'>" + "Non ci sono oggetti vicini");
