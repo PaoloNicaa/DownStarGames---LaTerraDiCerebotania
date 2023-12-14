@@ -29,7 +29,6 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
     private int playerY;
     private List<Item> itemLista;
     private int mela,stivali,spada,coppa,anello;
-    private int valoreTot = 0; 
     Player player;
 
     public String getText() {
@@ -78,7 +77,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         ImageIcon[] itemIcon = new ImageIcon[numItem];
         JLabel[] itemLabel = new JLabel[numItem];
         itemPanel = new JPanel[numItem];
-        itemLista = new ArrayList<>();
+        itemLista = new ArrayList<Item>();
         // Ciclo for per spawn random degli oggetti
         for (int i = 0; i < numItem - 1; i++) {
             int rnd = random.nextInt(7);
@@ -143,7 +142,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         testoLabel.setBounds(0, 20, getWidth(), getHeight()); // Imposta dimensioni e posizione al centro
 
         nomePlayer = new JLabel(playerName);
-        nomePlayer.setFont(new Font("Arial", Font.BOLD, 15));
+        nomePlayer.setFont(new Font("Arial", Font.BOLD, 20));
         nomePlayer.setForeground(Color.WHITE); // Colore del testo
         nomePlayer.setBounds(playerX+50, playerY-550, getWidth(), getHeight());
 
@@ -251,37 +250,31 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             Item closestItem = player.findClosestItem(itemLista); // Distanza molto aumentata per via di bug coordinate
             System.out.println("Closest Item: " + closestItem + ", x e y del player: " + player.getX() + " " + player.getY() + "\n"); // Controllo in console cosa ritorna
             
-            if (closestItem != null) {  // Controlla se ci sono oggetti vicini   
+            if (closestItem != null) {  // Controlla se ci sono oggetti vicini       
                 Audio.playSound("/UIManager/audio/up.wav"); 
                     if (closestItem instanceof Mela) {
                         mela++;
                         player.setStepRimanenti((player.getStepRimanenti()+10));
                         testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!<br>Hai guadagnato 10 passi!");
-                        valoreTot += closestItem.getValore();
                     }
                     else if (closestItem instanceof Stivali) {
                         stivali++;
                         player.setStepRimanenti((player.getStepRimanenti()+30));
                         testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!<br>Hai guadagnato 30 passi!");
-                        valoreTot += closestItem.getValore();
                     }
                     else if (closestItem instanceof Spada) {
                         spada++;
                         testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!");
-                        valoreTot += closestItem.getValore();
                     }
                     else if (closestItem instanceof Coppa) {
                         coppa++;
                         testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!");
-                        valoreTot += closestItem.getValore();
                     }
                     else if (closestItem instanceof Anello) {
                         anello++;
                         testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!");
-                        valoreTot += closestItem.getValore();
                     }
                     
-                    player.setValoreOgg(valoreTot);
                     player.removeItem(itemPanel, layeredPane, closestItem.getItemX(), closestItem.getItemY());
                     itemLista.remove(closestItem);
 
