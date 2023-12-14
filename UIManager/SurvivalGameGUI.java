@@ -258,23 +258,33 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
                         mela++;
                         player.setStepRimanenti((player.getStepRimanenti()+10));
                         testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!<br>Hai guadagnato 10 passi!");
+
+                        player.setValoreInventory(closestItem);
                     }
                     else if (closestItem instanceof Stivali) {
                         stivali++;
                         player.setStepRimanenti((player.getStepRimanenti()+30));
                         testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!<br>Hai guadagnato 30 passi!");
+
+                        player.setValoreInventory(closestItem);
                     }
                     else if (closestItem instanceof Spada) {
                         spada++;
                         testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!");
+
+                        player.setValoreInventory(closestItem);
                     }
                     else if (closestItem instanceof Coppa) {
                         coppa++;
                         testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!");
+
+                        player.setValoreInventory(closestItem);
                     }
                     else if (closestItem instanceof Anello) {
                         anello++;
                         testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!");
+
+                        player.setValoreInventory(closestItem);
                     }
                     
                     player.removeItem(itemPanel, layeredPane, closestItem.getItemX(), closestItem.getItemY());

@@ -38,7 +38,7 @@ public class WinGUI extends JFrame implements KeyListener{
         layeredPane.setPreferredSize(getSize());
         layeredPane.add(backgroundLabel, JLayeredPane.DEFAULT_LAYER);
 
-        JLabel scorLabel = new JLabel("<html>Score totalizzato: " + player.getValoreOgg() + "</html>");
+        JLabel scorLabel = new JLabel("<html>Score totalizzato: " + player.getValoreInventory() + "</html>");
         scorLabel.setFont(new Font("Arial", Font.BOLD, 24));
         scorLabel.setForeground(Color.WHITE); // Colore del testo
         scorLabel.setBounds(150, 150, getWidth(), getHeight());

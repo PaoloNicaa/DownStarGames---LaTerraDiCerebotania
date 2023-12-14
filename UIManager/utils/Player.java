@@ -20,6 +20,7 @@ public class Player {
     protected int i = 0;
     protected int numItem = 1;
     protected Item closestItem;
+    protected int valoreInventory = 0;
 
     //---------------------------------- SETTERS & GETTERS ---------------------------------- //
     public Player(int x, int y) {
@@ -55,7 +56,7 @@ public class Player {
         return stepRimanenti;
     }
     
-    public int getValoreOgg() {
+    public int getValoreTot() {
         return valoreOgg;
     }
     
@@ -67,10 +68,18 @@ public class Player {
         this.stepRimanenti = stepRimanenti;
     }
     
-    public void setValoreOgg(int valoreOgg) {
+    public void setValoreTot(int valoreOgg) {
         this.valoreOgg += valoreOgg;
     }
-    
+
+    public void setValoreInventory(Item item){
+        this.valoreInventory += item.getValore();
+    }
+
+    public int getValoreInventory(){
+        return valoreInventory;
+    }
+
     public void setBackpack(List<Item> backpack) {
         this.backpack = backpack;
     }
@@ -92,7 +101,7 @@ public class Player {
         itemPanel[i].add(itemLabel[i]);
         itemPanel[i].setBounds(obj.rndX(), obj.rndY(), 64, 64);
         layeredPane.add(itemPanel[i], JLayeredPane.PALETTE_LAYER);
-        setValoreOgg(obj.getValore());
+        setValoreTot(obj.getValore());
     }
 
     public void removeItem(JPanel[] itemPanel, JLayeredPane layeredPane, int x, int y) {

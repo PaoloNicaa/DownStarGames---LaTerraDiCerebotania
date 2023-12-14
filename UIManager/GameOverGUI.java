@@ -38,12 +38,18 @@ public class GameOverGUI extends JFrame implements KeyListener{
         layeredPane.setPreferredSize(getSize());
         layeredPane.add(backgroundLabel, JLayeredPane.DEFAULT_LAYER);
 
-        JLabel scorLabel = new JLabel("<html>Score totalizzato: " + player.getValoreOgg() + "</html>");
-        scorLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        scorLabel.setForeground(Color.WHITE); // Colore del testo
-        scorLabel.setBounds(150, 150, getWidth(), getHeight());
+        JLabel scoreLabel = new JLabel("<html>Score totalizzato: " + player.getValoreInventory() + "</html>");
+        scoreLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        scoreLabel.setForeground(Color.WHITE); // Colore del testo
+        scoreLabel.setBounds(150, 130, getWidth(), getHeight());
+
+        JLabel scoreLabel2 = new JLabel("<html>Score da totalizzare per vincere: " + player.getValoreTot() + "</html>");
+        scoreLabel2.setFont(new Font("Arial", Font.BOLD, 24));
+        scoreLabel2.setForeground(Color.WHITE); // Colore del testo
+        scoreLabel2.setBounds(50, 150, getWidth(), getHeight());
        
-        layeredPane.add(scorLabel, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(scoreLabel, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(scoreLabel2, JLayeredPane.PALETTE_LAYER);
         add(layeredPane);
         
         setVisible(true);
