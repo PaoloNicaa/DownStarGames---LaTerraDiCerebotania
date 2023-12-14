@@ -15,6 +15,7 @@ import UIManager.Item.Coppa;
 import UIManager.Item.Item;
 import UIManager.Item.Anello;
 import UIManager.audio.Audio;
+import UIManager.audio.AudioLoop;
 
 public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListener {
     private JLayeredPane layeredPane;
@@ -183,6 +184,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
                     dispose();
                     PlayerNameGUI gui = new PlayerNameGUI();
                     gui.setVisible(true);
+                    AudioLoop.togglePause();
                 }
             });
             timer.setRepeats(false);
