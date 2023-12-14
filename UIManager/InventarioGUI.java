@@ -1,6 +1,9 @@
 package UIManager;
 
 import javax.swing.*;
+
+import UIManager.audio.Audio;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -111,6 +114,7 @@ public class InventarioGUI  extends JFrame implements KeyListener {
             revalidate();
             repaint();
             dispose();
+            Audio.playSound("/UIManager/audio/inventario.wav");
         }
     }
 
