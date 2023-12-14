@@ -117,7 +117,7 @@ public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener
 
         playerNameField = new JTextField();
         playerNameField.setBounds(110, 215, 150, 23);
-        playerNameField.setFont(new Font("Arial", Font.ITALIC, 20));
+        playerNameField.setFont(new Font("Segoe Script", Font.ITALIC, 20));
         playerNameLabel.setForeground(new Color(0,0,0,255));
         playerNameField.setBorder(null);
         playerNameField.setBackground(new Color(231,213,179,255));
