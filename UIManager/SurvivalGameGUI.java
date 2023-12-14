@@ -15,7 +15,6 @@ import UIManager.Item.Coppa;
 import UIManager.Item.Item;
 import UIManager.Item.Anello;
 import UIManager.audio.Audio;
-import UIManager.audio.AudioLoop;
 
 public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListener {
     private JLayeredPane layeredPane;
@@ -132,6 +131,8 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
 
                 System.out.println("anello: " + anello.getItemX() + " " + anello.getItemY()); // Controllo in console cosa ritorna
             }
+
+            
         }
 
         // --------- Creazione JLabel per il testo ---------
@@ -149,7 +150,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
 
         // Aggiunta componenti al layeredPane
         layeredPane.add(nomePlayer, JLayeredPane.MODAL_LAYER);
-        layeredPane.add(playerPanel, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(playerPanel, JLayeredPane.MODAL_LAYER);
         layeredPane.add(testoLabel, JLayeredPane.MODAL_LAYER);
         add(layeredPane);
 
@@ -184,7 +185,6 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
                     dispose();
                     PlayerNameGUI gui = new PlayerNameGUI();
                     gui.setVisible(true);
-                    AudioLoop.togglePause();
                 }
             });
             timer.setRepeats(false);
@@ -281,18 +281,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
                     itemLista.remove(closestItem);
 
                     if(itemLista.isEmpty()){
-                        WinGUI win = new WinGUI(player);
-                        Timer timer = new Timer(3000, new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                win.dispose();
-                                dispose();
-                                PlayerNameGUI gui = new PlayerNameGUI();
-                                gui.setVisible(true);
-                            }
-                        });
-                        timer.setRepeats(false);
-                        timer.start();
+                        new WinGUI(player);
                     }
             }
             else { 
