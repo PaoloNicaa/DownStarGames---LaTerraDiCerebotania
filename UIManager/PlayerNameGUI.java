@@ -16,7 +16,7 @@ public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener
     private SurvivalGameGUI game;
 
     public PlayerNameGUI() {
-        setTitle("Inserisci nome");
+        setTitle("Survival Game");
         setSize(1000,700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setUndecorated(true); // Per togliere la barra sopra bianca
@@ -49,8 +49,8 @@ public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener
         ImageIcon IconON = new ImageIcon(getClass().getResource("/UIManager/images/ON.png"));
         IconON = new ImageIcon(IconON.getImage().getScaledInstance(64, 32, Image.SCALE_SMOOTH));
         JLabel LabelON = new JLabel(IconON);
-        int musicX = 620;
-        int musicY = 110;
+        int musicX = 820;
+        int musicY = 40;
         PanelON = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         PanelON.setSize(IconON.getIconWidth(), IconON.getIconHeight());
         PanelON.setOpaque(false);
@@ -101,7 +101,7 @@ public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener
         JLabel musica = new JLabel("<html>MUSICA:</html>");
         musica.setFont(new Font("Arial", Font.BOLD, 15));
         musica.setForeground(new Color(0,0,0,255));
-        musica.setBounds(550, 100, 130, 54);
+        musica.setBounds(750, 30, 130, 54);
 
         JLabel text = new JLabel("<html>SURVIVAL GAME</html>");
         text.setFont(new Font("Arial", Font.BOLD, 15));
@@ -203,6 +203,24 @@ public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener
             }
         });
 
+        // -------------------------- Seconda pagina --------------------------
+
+        ImageIcon IconBanner2 = new ImageIcon(getClass().getResource("/UIManager/images/banner.png"));
+        IconBanner2 = new ImageIcon(IconBanner2.getImage().getScaledInstance(250, 64, Image.SCALE_SMOOTH));
+        JLabel LabelBanner2 = new JLabel(IconBanner2);
+        int banner2X = 620;
+        int banner2Y = 110;
+        JPanel PanelBanner2 = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        PanelBanner2.setSize(IconBanner2.getIconWidth(), IconBanner2.getIconHeight());
+        PanelBanner2.setOpaque(false);
+        PanelBanner2.add(LabelBanner2);
+        PanelBanner2.setBounds(banner2X, banner2Y, 250,64);
+
+        JLabel textCustom = new JLabel("<html>CUSTOM GAME</html>");
+        textCustom.setFont(new Font("Arial", Font.BOLD, 15));
+        textCustom.setForeground(new Color(0,0,0,255));
+        textCustom.setBounds(685, 115, 130, 54);
+
         JLabel customGameLabel = new JLabel("<html><p align='justify'>Partita personalizzata, consigliata per chi ha gia' provato il gioco normale.<br>Numero passi:<br><br>Numero item:</p></html>");
         customGameLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         customGameLabel.setForeground(new Color(0,0,0,255));
@@ -254,7 +272,7 @@ public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener
             }
         });
 
-        ImageIcon IconButton2 = new ImageIcon(getClass().getResource("/UIManager/images/buttonStart.png"));
+        ImageIcon IconButton2 = new ImageIcon(getClass().getResource("/UIManager/images/customButtonStart.png"));
         IconButton2 = new ImageIcon(IconButton2.getImage().getScaledInstance(120, 60, Image.SCALE_SMOOTH));
         JLabel LabelButton2 = new JLabel(IconButton2);
         int button2X = 680;
@@ -271,11 +289,16 @@ public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener
                     try {
                         int step = Integer.parseInt(stepField.getText());
                         int item = Integer.parseInt(itemField.getText());
-                        game = new SurvivalGameGUI(playerName, item, step);
+                        if (step < 0 || item < 0) {
+                            JOptionPane.showMessageDialog(null, "Inserisci solo numeri validi!", "Attenzione!", JOptionPane.ERROR_MESSAGE);
+                        }
+                        else {
+                            game = new SurvivalGameGUI(playerName, item, step);
+                        }
                     }
                     catch (NumberFormatException ex) {
                         // Se l'utente ha inserito una stringa non convertibile in intero
-                        JOptionPane.showMessageDialog(null, "Inserisci solo numeri validi!");
+                        JOptionPane.showMessageDialog(null, "Inserisci solo numeri validi!", "Attenzione!", JOptionPane.ERROR_MESSAGE);
                     }
                     game.setVisible(true);
                     ImageIcon iconaFrame = new ImageIcon(SurvivalGameGUI.class.getResource("/UIManager/images/icon.png"));
@@ -303,8 +326,10 @@ public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener
         layeredPane.add(PanelON, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(PanelOFF, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(PanelBanner, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(PanelBanner2, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(musica, JLayeredPane.MODAL_LAYER);
         layeredPane.add(text, JLayeredPane.MODAL_LAYER);
+        layeredPane.add(textCustom, JLayeredPane.MODAL_LAYER);
         layeredPane.add(playerNameLabel, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(customGameLabel, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(playerNameField, JLayeredPane.PALETTE_LAYER);

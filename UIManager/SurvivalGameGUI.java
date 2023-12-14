@@ -148,7 +148,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
 
         // Aggiunta componenti al layeredPane
         layeredPane.add(nomePlayer, JLayeredPane.MODAL_LAYER);
-        layeredPane.add(playerPanel, JLayeredPane.MODAL_LAYER);
+        layeredPane.add(playerPanel, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(testoLabel, JLayeredPane.MODAL_LAYER);
         add(layeredPane);
 
