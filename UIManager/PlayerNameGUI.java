@@ -109,7 +109,7 @@ public class PlayerNameGUI extends JFrame implements KeyListener, ActionListener
         text.setBounds(200, 115, 130, 54);
 
 
-        JLabel playerNameLabel = new JLabel("<html><p align='justify'><br>Tanto tempo fa, ci fu un cavaliere di nome:<br><br>Egli aveva la missione di esplorare la terra di Sciambox per raccogliere tutti gli oggetti di estremo valore presenti e riportarli al re, ma le sue gambe avevano un problema: dopo 100 passi smettevano di funzionare per il resto della giornata. Raccogli tutti gli item presenti per vincere.</p></html>");
+        JLabel playerNameLabel = new JLabel("<html><p align='justify'><br>Tanto tempo fa, ci fu un cavaliere di nome:<br><br>Egli aveva la missione di esplorare la terra di Cerebotania per raccogliere tutti gli oggetti di estremo valore presenti e riportarli al re, ma le sue gambe avevano un problema: dopo 100 passi smettevano di funzionare per il resto della giornata. Raccogli tutti gli item presenti per vincere.</p></html>");
         playerNameLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         playerNameLabel.setForeground(new Color(0,0,0,255));
         playerNameLabel.setBounds(110, 60, 300, 500);
