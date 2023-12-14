@@ -39,7 +39,7 @@ public class AudioLoop {
     }
 
     // Restituisce lo stato corrente della pausa
-    public boolean isPaused() {
+    public static boolean isPaused() {
         return paused;
     }
 }

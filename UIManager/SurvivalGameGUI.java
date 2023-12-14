@@ -15,6 +15,7 @@ import UIManager.Item.Coppa;
 import UIManager.Item.Item;
 import UIManager.Item.Anello;
 import UIManager.audio.Audio;
+import UIManager.audio.AudioLoop;
 
 public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListener {
     private JLayeredPane layeredPane;
@@ -79,7 +80,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         itemPanel = new JPanel[numItem];
         itemLista = new ArrayList<Item>();
         // Ciclo for per spawn random degli oggetti
-        for (int i = 0; i < numItem - 1; i++) {
+        for (int i = 0; i < numItem; i++) {
             int rnd = random.nextInt(7);
             if(rnd == 0)
             {
@@ -185,6 +186,9 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
                     dispose();
                     PlayerNameGUI gui = new PlayerNameGUI();
                     gui.setVisible(true);
+                    if (AudioLoop.isPaused()) {
+                        AudioLoop.togglePause();
+                    }
                 }
             });
             timer.setRepeats(false);
@@ -299,6 +303,9 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
                                 dispose();
                                 PlayerNameGUI gui = new PlayerNameGUI();
                                 gui.setVisible(true);
+                                if (AudioLoop.isPaused()) {
+                                    AudioLoop.togglePause();
+                                }
                             }
                         });
                         timer.setRepeats(false);
