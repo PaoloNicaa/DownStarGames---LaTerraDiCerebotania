@@ -10,4 +10,9 @@ public class Anello extends Item {
         Item anello = new Anello();
         return anello;
     }
+
+    @Override
+    public int getValore() {
+        return super.getValore();
+    }
 }

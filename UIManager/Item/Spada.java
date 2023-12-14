@@ -10,4 +10,9 @@ public class Spada extends Item {
         Item spada = new Spada();
         return spada;
     }
+
+    @Override
+    public int getValore() {
+        return super.getValore();
+    }
 }

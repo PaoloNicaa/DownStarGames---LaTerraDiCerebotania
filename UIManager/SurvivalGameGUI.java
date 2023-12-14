@@ -29,6 +29,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
     private int playerY;
     private List<Item> itemLista;
     private int mela,stivali,spada,coppa,anello;
+    private int valoreTot = 0; 
     Player player;
 
     public String getText() {
@@ -173,12 +174,6 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         boolean gameOverShown = false;
         if (player.canMove()) {
             player.movimento();
-<<<<<<< HEAD
-        }
-        else
-        {
-            new GameOverGUI(player);
-=======
         } else if (!gameOverShown) { 
             gameOverShown = true;
             GameOverGUI gui = new GameOverGUI(player);
@@ -193,7 +188,6 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             });
             timer.setRepeats(false);
             timer.start();
->>>>>>> 028ad85df2c2ab0b243dbe263d4fc6da1922c7fb
         }
     }
 
@@ -257,41 +251,37 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             Item closestItem = player.findClosestItem(itemLista); // Distanza molto aumentata per via di bug coordinate
             System.out.println("Closest Item: " + closestItem + ", x e y del player: " + player.getX() + " " + player.getY() + "\n"); // Controllo in console cosa ritorna
             
-            if (closestItem != null) {  // Controlla se ci sono oggetti vicini       
+            if (closestItem != null) {  // Controlla se ci sono oggetti vicini   
                 Audio.playSound("/UIManager/audio/up.wav"); 
                     if (closestItem instanceof Mela) {
                         mela++;
                         player.setStepRimanenti((player.getStepRimanenti()+10));
                         testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!<br>Hai guadagnato 10 passi!");
-
-                        itemLista.remove(closestItem);
+                        valoreTot += closestItem.getValore();
                     }
                     else if (closestItem instanceof Stivali) {
                         stivali++;
                         player.setStepRimanenti((player.getStepRimanenti()+30));
                         testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!<br>Hai guadagnato 30 passi!");
-
-                        itemLista.remove(closestItem);
+                        valoreTot += closestItem.getValore();
                     }
                     else if (closestItem instanceof Spada) {
                         spada++;
                         testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!");
-
-                        itemLista.remove(closestItem);
+                        valoreTot += closestItem.getValore();
                     }
                     else if (closestItem instanceof Coppa) {
                         coppa++;
                         testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!");
-
-                        itemLista.remove(closestItem);
+                        valoreTot += closestItem.getValore();
                     }
                     else if (closestItem instanceof Anello) {
                         anello++;
                         testoLabel.setText("<html><div style='text-align: center;'>" + "L'oggetto " + closestItem.getName() + " e' stato aggiunto all'inventario!");
-
-                        itemLista.remove(closestItem);
+                        valoreTot += closestItem.getValore();
                     }
                     
+                    player.setValoreOgg(valoreTot);
                     player.removeItem(itemPanel, layeredPane, closestItem.getItemX(), closestItem.getItemY());
                     itemLista.remove(closestItem);
             }
