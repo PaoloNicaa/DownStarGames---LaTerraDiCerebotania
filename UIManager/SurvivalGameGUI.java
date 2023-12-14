@@ -22,6 +22,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
     private JPanel playerPanel;
     private JLabel playerLabel;
     private JLabel testoLabel;
+    private JLabel nomePlayer;
     private ImageIcon playerIcon;
     private JPanel[] itemPanel;
     private int playerX;
@@ -140,7 +141,13 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         testoLabel.setVerticalAlignment(JLabel.TOP);
         testoLabel.setBounds(0, 20, getWidth(), getHeight()); // Imposta dimensioni e posizione al centro
 
+        nomePlayer = new JLabel(playerName);
+        nomePlayer.setFont(new Font("Arial", Font.BOLD, 15));
+        nomePlayer.setForeground(Color.WHITE); // Colore del testo
+        nomePlayer.setBounds(playerX+50, playerY-550, getWidth(), getHeight());
+
         // Aggiunta componenti al layeredPane
+        layeredPane.add(nomePlayer, JLayeredPane.MODAL_LAYER);
         layeredPane.add(playerPanel, JLayeredPane.MODAL_LAYER);
         layeredPane.add(testoLabel, JLayeredPane.MODAL_LAYER);
         add(layeredPane);
@@ -163,13 +170,23 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
     }
 
     public void GruppoMove() {
-        if(player.canMove())
-        {
+        boolean gameOverShown = false;
+        if (player.canMove()) {
             player.movimento();
-        }
-        else
-        {
-            GameOverGUI gameOverGUI = new GameOverGUI(player);
+        } else if (!gameOverShown) { 
+            gameOverShown = true;
+            GameOverGUI gui = new GameOverGUI(player);
+            Timer timer = new Timer(3000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    gui.dispose();
+                    dispose();
+                    PlayerNameGUI gui = new PlayerNameGUI();
+                    gui.setVisible(true);
+                }
+            });
+            timer.setRepeats(false);
+            timer.start();
         }
     }
 
@@ -177,6 +194,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
         playerX = Math.max(0, Math.min(getWidth() - playerIcon.getIconWidth(), playerX)); // Bordi per player
         playerY = Math.max(0, Math.min(getHeight() - playerIcon.getIconHeight(), playerY)); // Per bordo inferiore
         playerPanel.setBounds(playerX, playerY, playerPanel.getWidth(), playerPanel.getHeight());
+        nomePlayer.setBounds(playerX+50, playerY-550, getWidth(), getHeight());
         revalidate();
         repaint();
     }
@@ -195,6 +213,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             playerY -= 20;
             player.setY(playerY);
             playerLabel.setIcon(playerIcon);
+            nomePlayer.setBounds(playerX+50, playerY-550, getWidth(), getHeight());
         }
         else if (key == KeyEvent.VK_A)
         {
@@ -204,6 +223,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             playerX -= 20;
             player.setX(playerX);
             playerLabel.setIcon(playerIcon);
+            nomePlayer.setBounds(playerX+50, playerY-550, getWidth(), getHeight());
         }
         else if (key == KeyEvent.VK_S)
         {
@@ -213,6 +233,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             playerY += 20;
             player.setY(playerY);
             playerLabel.setIcon(playerIcon);
+            nomePlayer.setBounds(playerX+50, playerY-550, getWidth(), getHeight());
         }
         else if (key == KeyEvent.VK_D)
         {
@@ -222,6 +243,7 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
             playerX += 20;
             player.setX(playerX); 
             playerLabel.setIcon(playerIcon);
+            nomePlayer.setBounds(playerX+50, playerY-550, getWidth(), getHeight());
         }
         else if (key == KeyEvent.VK_E)
         {
