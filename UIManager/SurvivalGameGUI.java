@@ -279,7 +279,18 @@ public class SurvivalGameGUI extends JFrame implements ActionListener, KeyListen
                     itemLista.remove(closestItem);
 
                     if(itemLista.isEmpty()){
-                        new WinGUI(player);
+                        WinGUI win = new WinGUI(player);
+                        Timer timer = new Timer(3000, new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                win.dispose();
+                                dispose();
+                                PlayerNameGUI gui = new PlayerNameGUI();
+                                gui.setVisible(true);
+                            }
+                        });
+                        timer.setRepeats(false);
+                        timer.start();
                     }
             }
             else { 
